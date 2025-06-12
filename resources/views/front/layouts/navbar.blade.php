@@ -281,6 +281,105 @@
     font-size: 1rem;
     color: #07d82a;
 }
+
+/* ===============================
+   RESPONSIVE ENHANCEMENTS
+   =============================== */
+   @media (max-width: 767px) {
+    /* Logo: Resize and center on smaller screens */
+    .navbar-brand-NA img {
+        height: 60px;
+        max-width: 150px;
+        margin: 0 auto;
+        display: block;
+        transform: scale(1.6); /* Less aggressive scaling */
+    }
+
+    .green-space-NA {
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        padding: 5px;
+        text-align: center;
+    }
+
+    .language-section-NA {
+        flex-direction: row;
+        justify-content: center;
+    }
+
+    /* Collapse the navbar neatly */
+    .navbar-nav-NA {
+        padding-top: 10px;
+    }
+
+    /* Adjust padding for touch targets */
+    .navbar-nav-NA .nav-link-NA {
+        padding: 12px 0;
+        font-size: 1rem;
+    }
+
+    /* Make logo appear above collapsed menu */
+    .navbar-brand-NA {
+        order: -1;
+        width: 100%;
+        text-align: center;
+        margin-bottom: 10px;
+    }
+
+    /* Adjust search layout in collapsed mode */
+    .search-container-NA {
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+        margin-top: 15px;
+    }
+
+    .search-input-NA {
+        width: 90% !important;
+        max-width: 100%;
+        text-align: center;
+    }
+
+    #search-results {
+        left: 0;
+        max-width: 100%;
+        width: 90%;
+    }
+}
+
+/* Extra: Improve spacing on medium screens */
+@media (max-width: 991px) {
+    .navbar-brand-NA img {
+        height: 80px;
+        transform: scale(1.8);
+    }
+
+    .search-container-NA {
+        margin-top: 10px;
+    }
+
+    .search-input-NA {
+        width: 100%;
+    }
+}
+
+.see-all-container {
+    margin-top: 10px;
+    text-align: center;
+}
+
+.see-all-link {
+    color: rgb(46, 57, 141);
+    font-weight: bold;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.see-all-link:hover {
+    text-decoration: underline;
+}
+
     </style>
 
 <div class="green-space-NA"
@@ -306,7 +405,6 @@ style="width: 100%; display: flex; justify-content: {{ app()->getLocale() === 'a
 
 </a>
 </div>
-
         <nav class="navbar navbar-expand-lg navbar-light navbar-NA"
         dir="{{ app()->getLocale() === 'ar' ? 'rtl' : 'ltr' }}">
         <a class="navbar-brand navbar-brand-NA" href="{{ route('home') }}">
@@ -344,7 +442,6 @@ style="width: 100%; display: flex; justify-content: {{ app()->getLocale() === 'a
                 </li>
             </ul>
 
-
             <div class="search-container-NA">
                 <!-- Search Input -->
                 <input type="text" class="form-control_NA search-input-NA" id="search-input-NA" placeholder="Search...">
@@ -363,7 +460,6 @@ style="width: 100%; display: flex; justify-content: {{ app()->getLocale() === 'a
             </div>
         </div>
     </nav>
-
 
         <script>
 document.addEventListener("DOMContentLoaded", function () {
@@ -413,26 +509,45 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     });
 
-    // Function to display search results dynamically
-    function displaySearchResults(products) {
-        searchResults.innerHTML = ""; // Clear previous results
-
-        if (products.length === 0) {
-            searchResults.innerHTML = "<p class='search-no-results'>No results found.</p>";
-        } else {
-            let ul = document.createElement("ul");
-            ul.classList.add("search-results-list");
-
-            products.forEach(product => {
-                let li = document.createElement("li");
-                li.classList.add("search-result-item");
-                li.innerHTML = `<a href="/products/${product.id}" class="search-result-link">${product.title_en}</a>`;
-                ul.appendChild(li);
-            });
-
-            searchResults.appendChild(ul);
+    searchInput.addEventListener("keydown", function (e) {
+    if (e.key === "Enter") {
+        e.preventDefault(); // prevent form submission or default behavior
+        const query = searchInput.value.trim();
+        if (query.length > 2) {
+            // Redirect to search_results page with the query
+            window.location.href = `/search_results?query=${encodeURIComponent(query)}`;
         }
     }
+});
+
+
+    // Function to display search results dynamically
+    function displaySearchResults(products) {
+    searchResults.innerHTML = ""; // Clear previous results
+
+    if (products.length === 0) {
+        searchResults.innerHTML = "<p class='search-no-results'>No results found.</p>";
+    } else {
+        let ul = document.createElement("ul");
+        ul.classList.add("search-results-list");
+
+        products.forEach(product => {
+            let li = document.createElement("li");
+            li.classList.add("search-result-item");
+            li.innerHTML = `<a href="/products/${product.id}" class="search-result-link">${product.title_en}</a>`;
+            ul.appendChild(li);
+        });
+
+        searchResults.appendChild(ul);
+
+        // Add "See All" link at the bottom
+        let seeAllDiv = document.createElement("div");
+        seeAllDiv.classList.add("see-all-container");
+        seeAllDiv.innerHTML = `<a href="/search_results?query=${encodeURIComponent(searchInput.value.trim())}" class="see-all-link">See All</a>`;
+        searchResults.appendChild(seeAllDiv);
+    }
+}
+
 
     // Hide search results when clicking outside
     document.addEventListener("click", function (event) {
@@ -457,4 +572,4 @@ function toggleFlag() {
         flagText.textContent = "Arabic";
     }
 }
-        </script>
+ </script>

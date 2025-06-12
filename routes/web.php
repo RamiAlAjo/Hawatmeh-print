@@ -89,6 +89,8 @@ Route::middleware([
     Route::resource('photo', FrontPhotoAlbumController::class)->only(['index', 'show']);
     Route::resource('video', controller: FrontVideoAlbumController::class)->only(['index', 'show']);
     Route::get('/search', [FrontSearchController::class, 'search'])->name('search');
+    Route::get('/search_results', [FrontSearchController::class, 'searchResults'])->name('search.results');
+
     Route::resource('portfolio', FrontPortfolioController::class);
     Route::resource('clients', FrontClientController::class);
 });

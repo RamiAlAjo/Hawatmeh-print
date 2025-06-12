@@ -20,3 +20,6 @@
     font-size: 1.5rem; /* You can adjust this value */
 }
 </style>
+
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+

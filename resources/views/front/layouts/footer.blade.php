@@ -64,7 +64,66 @@
     text-align: center;   /* Optional: centers text inside */
 }
 
+@media (max-width: 767px) {
+  .FO-footer {
+    text-align: center;
+    padding: 20px 10px;
+  }
 
+  .FO-footer .FO-logo img,
+  .FO-footer .FO-right-img img {
+    max-height: 100px;
+    transform: scale(1.2);
+    margin: 0 auto;
+  }
+
+  .FO-footer .FO-quick-links {
+    margin-top: 20px;
+  }
+
+  .FO-footer .FO-quick-links h5 {
+    font-size: 22px;
+    margin-bottom: 15px;
+  }
+
+  .FO-footer .FO-quick-links a {
+    font-size: 18px;
+    margin: 4px 0;
+  }
+
+  .FO-footer .FO-quick-links .row {
+    flex-direction: column;
+  }
+
+  .FO-footer .FO-quick-links .col {
+    margin-bottom: 10px;
+  }
+
+  .FO-social-icons {
+    justify-content: center;
+  }
+
+  .FO-social-icons i {
+    font-size: 22px;
+    margin: 0 8px;
+  }
+
+  .FO-visitor-counter {
+    font-size: 16px;
+    margin-top: 10px;
+  }
+
+  .FO-counter-box {
+    padding: 4px 6px;
+    margin: 0 1px;
+    font-size: 14px;
+  }
+
+  .custom-width {
+    max-width: 100%;
+    padding: 0 10px;
+  }
+}
 </style>
 
 <footer class="FO-footer">
@@ -75,14 +134,16 @@
       <div class="col-md-3 FO-logo mb-3 mb-md-0">
         <img src="{{ asset('./Hawatmeh Logo.svg') }}" alt="Awatmeh Pack Logo" class="img-fluid" style="transform: scale(2.1);">
 
-        <div class="FO-visitor-counter mt-2">
-          Visitors
-          <span class="FO-counter-box">1</span>
-          <span class="FO-counter-box">2</span>
-          <span class="FO-counter-box">3</span>
-          <span class="FO-counter-box">4</span>
-          <span class="FO-counter-box">5</span>
-        </div>
+        <div class="FO-visitor-counter mt-2" aria-label="Visitor counter" role="group">
+            <span class="fw-bold">Visitors</span>
+            <span class="visually-hidden">Visitor count is</span>
+            <span class="FO-counter-box" data-digit="1">0</span>
+            <span class="FO-counter-box" data-digit="2">0</span>
+            <span class="FO-counter-box" data-digit="3">0</span>
+            <span class="FO-counter-box" data-digit="4">0</span>
+            <span class="FO-counter-box" data-digit="5">0</span>
+          </div>
+
       </div>
 
 <!-- Center: Quick Links -->
@@ -105,7 +166,6 @@
         &copy;2025 by Jordan Code &#10006;
     </div>
 </div>
-
 
 <!-- Right Side: Full Image (includes Arabic text) -->
 <div class="col-md-3 FO-right-img mb-3 mb-md-0 text-center">
@@ -135,5 +195,27 @@
 
     </div>
 </div>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+      document.querySelectorAll(".animated-counter").forEach((box, index) => {
+        const target = parseInt(box.getAttribute("data-digit"), 10);
+        if (isNaN(target)) return;
+
+        let current = 0;
+
+        const interval = setInterval(() => {
+          box.textContent = current;
+          box.classList.add("counting");
+          if (current >= target) {
+            clearInterval(interval);
+            box.classList.remove("counting");
+          }
+          current++;
+        }, 100 + index * 30); // staggered animation delay
+      });
+    });
+  </script>
+
 
 </footer>

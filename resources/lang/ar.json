@@ -48,5 +48,9 @@
     "Dashboard": "لوحة التحكم",
     "Video Gallery": "معرض الفيديوهات",
     "untitled_video": "فيديو بدون عنوان",
-    "our_photo_gallery": "معرض الصور الخاص بنا"
+    "our_photo_gallery": "معرض الصور الخاص بنا",
+    "search_results": "نتائج البحث",
+    "search_results_for": "نتائج البحث عن \" :query \"",
+    "no_products_found": "لم يتم العثور على منتجات تطابق معايير البحث.",
+    "published_on": "تاريخ النشر"
 }

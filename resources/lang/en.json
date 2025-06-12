@@ -48,6 +48,10 @@
     "Dashboard": "Dashboard",
     "Video Gallery": "Video Gallery",
     "untitled_video": "Untitled Video",
-    "our_photo_gallery": "Our Photo Gallery"
+    "our_photo_gallery": "Our Photo Gallery",
+    "search_results": "Search Results",
+    "search_results_for": "Search Results for \" :query \"",
+    "no_products_found": "No products found matching your search criteria.",
+    "published_on": "Published on"
 
 }

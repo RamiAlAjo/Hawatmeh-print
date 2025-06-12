@@ -75,6 +75,44 @@
                                 <input type="text" class="form-control" name="location" id="location" placeholder="Location URL" value="{{ $settings->location ?? '' }}">
                             </div>
 
+                            <!-- Add in your <head> or before your script -->
+                            <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+                            <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+                                                        <div id="admin-map" style="width: 100%; height: 200px; margin-top: 10px;"></div>
+
+                            <script>
+                                document.addEventListener("DOMContentLoaded", function() {
+                                    var locationInput = document.getElementById('location');
+                                    var map = L.map('admin-map').setView([51.505, -0.09], 13);
+
+                                    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                                        attribution: '&copy; OpenStreetMap contributors'
+                                    }).addTo(map);
+
+                                    var marker;
+
+                                    function updateMap() {
+                                        var url = locationInput.value;
+                                        var regex = /@(-?\d+\.\d+),(-?\d+\.\d+)/;
+                                        var matches = url.match(regex);
+                                        if (matches && matches.length >= 3) {
+                                            var coords = [parseFloat(matches[1]), parseFloat(matches[2])];
+                                            map.setView(coords, 15);
+                                            if (marker) {
+                                                marker.setLatLng(coords);
+                                            } else {
+                                                marker = L.marker(coords).addTo(map);
+                                            }
+                                        }
+                                    }
+
+                                    locationInput.addEventListener('input', updateMap);
+                                    updateMap(); // Initialize on page load
+                                });
+                            </script>
+
+
                             <!--<div class="form-group">-->
                             <!--    <label for="logo">Logo</label>-->
                             <!--    <input type="file" name="logo" class="form-control">-->

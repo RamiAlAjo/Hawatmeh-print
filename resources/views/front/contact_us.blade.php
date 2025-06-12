@@ -184,52 +184,10 @@
 
     <!-- Google Map Section -->
 
-     <div class="mt-4">
+     <div class="mt-4 contact-map">
                 <!-- Leaflet Map Container -->
-                <div id="map" style="width: 100%; height: 370px;"class="CON-map-container"></div>
+                <div id="map" style="width: 100%; height: 370px;" class="CON-map-container"></div>
             </div>
-
-            <script>
-                document.addEventListener("DOMContentLoaded", function() {
-                    // Extract coordinates from the location URL
-                    var locationUrl = "{{ App\Models\WebsiteSetting::first()->location ?? '' }}";
-                    var coordinates = null;
-
-                    if (locationUrl) {
-                        var regex = /@(-?\d+\.\d+),(-?\d+\.\d+)/;
-                        var matches = locationUrl.match(regex);
-                        if (matches) {
-                            coordinates = [parseFloat(matches[1]), parseFloat(matches[2])];
-                        }
-                    }
-
-                    // Initialize Leaflet map
-                    var map = L.map('map').setView([51.505, -0.09], 13); // Default coordinates
-
-                    if (coordinates) {
-                        map.setView(coordinates, 15); // Set view to the extracted coordinates
-                    }
-
-                    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-                        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-                    }).addTo(map);
-
-                    if (coordinates) {
-                        // Add a marker to the map
-                        L.marker(coordinates).addTo(map)
-                            .bindPopup('Your location')
-                            .openPopup();
-                    }
-                });
-            </script>
-            <!-- Leaflet CSS -->
-<link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
-
-<!-- Leaflet JavaScript -->
-<script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
-        </div>
-    </div>
-</div>
 
 
     <!-- Form Section -->
