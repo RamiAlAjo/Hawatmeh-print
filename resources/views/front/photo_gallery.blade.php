@@ -2,8 +2,7 @@
 
 @section('content')
 
-<x-banner :pageTitle="__('photo_gallery')" />
-
+<x-banner pageTitle="Photo Gallery" />
 
 <style>
     /* Photo Gallery Section */
@@ -87,6 +86,22 @@
     .gallery-item:hover .album-title {
         color: #2E7D32; /* Green text on hover */
     }
+    .gallery-item {
+        width: 300px; /* fixed width for 3 cards to fit in one row */
+        background-color: white;
+        border-radius: 15px;
+        overflow: hidden;
+        transition: transform 0.3s ease;
+        position: relative;
+        border: 2px solid #0d6efd;
+    }
+
+    .gallery-image {
+        height: 400px; /* adjust height if you want */
+        width: 100%;
+        overflow: hidden;
+        border-bottom: 2px solid #0d6efd;
+    }
 
     /* Adjusting the number of cards per slide in different screen sizes */
     @media (max-width: 1200px) {
@@ -122,23 +137,21 @@
 
 <div class="container">
     <!-- Photo Gallery Section -->
-    <h2 class="section-title" style="color: #2E7D32; margin-bottom: 30px;">Our Photo Gallery</h2>
+    <h2 class="section-title" style="color: #2E7D32; margin-bottom: 30px;">
+        {{ __("our_photo_gallery") }}
+    </h2>
 
     <div class="photo-gallery-section">
         @if (!empty($photoGalleries) && $photoGalleries->count())
             <div id="photoGalleryCarousel" class="carousel slide" data-bs-ride="carousel">
                 <div class="carousel-inner">
-                    @foreach ($photoGalleries->chunk(6) as $chunkIndex => $chunk)
+                    @foreach ($photoGalleries->chunk(3) as $chunkIndex => $chunk)
                         <div class="carousel-item {{ $chunkIndex === 0 ? 'active' : '' }}">
-                            <div class="d-flex flex-wrap justify-content-center">
+                            <div class="d-flex justify-content-center">
                                 @foreach ($chunk as $gallery)
-                                    <div class="gallery-item">
+                                    <div class="gallery-item me-3"> <!-- me-3 for right margin -->
                                         <div class="gallery-image">
                                             <img src="{{ asset('storage/' . $gallery->album_images) }}" alt="Gallery Image">
-                                        </div>
-                                        <div class="album-title">
-                                            <strong>{{ $gallery->album->album_title_en ?? 'Untitled Album' }}</strong><br>
-                                            <span>{{ $gallery->album->album_title_ar ?? '' }}</span>
                                         </div>
                                     </div>
                                 @endforeach

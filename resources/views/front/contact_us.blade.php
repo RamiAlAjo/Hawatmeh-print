@@ -4,15 +4,7 @@
 
 <x-banner :pageTitle="__('contact_us')" />
 
-
 <style>
-    /* General body styling */
-    body {
-        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        padding: 60px;
-        background-color: #f8f9fa;
-        color: #333;
-    }
 
     /* Contact Info Section */
     .CON-contact-info {

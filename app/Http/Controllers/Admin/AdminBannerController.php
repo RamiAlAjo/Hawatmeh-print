@@ -35,7 +35,7 @@ class AdminBannerController extends Controller
     $validatedData = $request->validate([
         'title_en' => 'required|string|max:255',
         'title_ar' => 'nullable|string|max:255',
-        'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+        'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:6048',
     ]);
 
     // Check if the request has a file to upload

@@ -199,7 +199,7 @@
     .contact-footer-HP {
         background-color: rgba(46, 125, 50, 0.8); /* Fallback solid color */
         color: white;
-        padding: 30px;
+        /* padding: 30px; */
         border-radius: 10px;
         display: flex;
         justify-content: space-between;
@@ -345,7 +345,6 @@
 </style>
 
 
-
 {{-- homepage carousel --}}
 <div id="carouselExampleCaptions" class="carousel slide">
     <div class="carousel-indicators">
@@ -369,7 +368,10 @@
                     <p class="carousel-caption-text-HP">
                         {{ app()->getLocale() === 'ar' ? $slider->description_ar : $slider->description }}
                     </p>
-                    <a href="#learnMore" class="btn btn-light carousel-btn-HP">{{ __('Learn More') }}</a>
+                    <a href="{{ $slider->url ?? '#' }}" class="btn btn-light carousel-btn-HP"  rel="noopener">
+                        {{ __('Learn More') }}
+                    </a>
+
                 </div>
             </div>
         @endforeach
@@ -403,13 +405,13 @@
     }
 
     /* Additional styling for the carousel if needed */
-    .carousel-caption-HP {
-        background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+    /* .carousel-caption-HP {
+        background-color: rgba(0, 0, 0, 0.5);
         padding: 15px;
-    }
+    } */
 
     .carousel-caption-title-HP {
-        font-size: 2rem;
+        font-size: 4rem;
         font-weight: bold;
         color: #fff;
     }
@@ -429,8 +431,8 @@
     .carousel-control-next-icon {
         background-color: #000; /* Black control icons for better visibility */
     }
-</style>
 
+</style>
 
 
 <div class="container mt-4">
@@ -440,53 +442,105 @@
         <p>{{ app()->getLocale() === 'ar' ? $aboutsection->about_section_description_ar : $aboutsection->about_section_description_en ?? __('No description available.') }}</p>
     </div>
 
-    <!-- Our Product Section -->
-    <h2 class="section-title-HP">{{ __('Our Product') }}</h2>
-    <div class="product-section-HP">
-        <div class="row">
-            @foreach($products as $product)
-                <div class="col-md-3 col-sm-6 col-12">
+   <!-- Our Product Section -->
+<h2 class="section-title-HP">{{ __('Our Product') }}</h2>
+<div class="product-section-HP">
+    <div class="row">
+        @foreach($products->take(4) as $product)
+            <div class="col-md-3 col-sm-6 col-12">
+                <a href="{{ route('products.show', $product->id) }}" class="text-decoration-none text-dark">
                     <div class="product-item-HP">
                         <div class="product-image-HP mb-3">
-                            <img
-                                src="{{ asset('uploads/products/' . $product->image) }}"
-                                alt="{{ app()->getLocale() === 'ar' ? $product->title_ar : $product->title_en ?? __('Product') }}"
-                            >
+                            <img src="{{ asset('storage/' . $product->image) }}"
+                                 alt="{{ app()->getLocale() === 'ar' ? $product->title_ar : ($product->title_en ?? __('Product')) }}">
                         </div>
                         <div class="product-name-HP">
                             {{ app()->getLocale() === 'ar' ? $product->title_ar : $product->title_en }}
                         </div>
                     </div>
-                </div>
-            @endforeach
-        </div>
-
-        <a href="{{ route('products.index') }}" class="more-link-HP">{{ __('More') }}</a>
+                </a>
+            </div>
+        @endforeach
     </div>
 
-    <!-- Our Client Section -->
-    <h2 class="section-title-HP">{{ __('Our Client') }}</h2>
-    <div class="client-section-HP">
-        <div class="row">
-            @foreach($clients as $client)
-                <div class="col-md-4 col-sm-6 col-12">
-                    <div class="client-item-HP">
-                        <div class="client-image-HP">
-                            <img
-                                src="{{ asset('uploads/clients/' . $client->client_image) }}"
-                                alt="{{ app()->getLocale() === 'ar' ? $client->client_title_ar : $client->client_title_en ?? __('Client') }}"
-                            >
-                        </div>
-                    </div>
-                </div>
-            @endforeach
-        </div>
+    <a href="{{ route('products.index') }}" class="more-link-HP">{{ __('More') }}</a>
+</div>
 
-        <div class="navigation-arrows-HP">
-            <span class="nav-arrow-HP">&#10094;</span>
-            <span class="nav-arrow-HP">&#10095;</span>
-        </div>
+
+  <!-- Our Client Section -->
+<h2 class="section-title-HP">{{ __('Our Client') }}</h2>
+<div class="client-section-HP position-relative">
+    <div class="client-carousel-HP d-flex overflow-hidden" id="client-carousel">
+        @foreach($clients as $client)
+        <div class="client-item-HP flex-shrink-0" style="width: 33.3333%;">
+
+                <div class="client-image-HP text-center">
+                    <img src="{{ asset('storage/' . $client->client_image) }}"
+                         alt="{{ app()->getLocale() === 'ar' ? $client->client_title_ar : $client->client_title_en }}">
+                </div>
+            </div>
+        @endforeach
     </div>
+
+    <!-- Navigation Arrows -->
+    <div class="navigation-arrows-HP d-flex justify-content-between position-absolute w-100 top-50 px-3" style="transform: translateY(-50%);">
+        <span class="nav-arrow-HP cursor-pointer" id="prev-client">&#10094;</span>
+        <span class="nav-arrow-HP cursor-pointer" id="next-client">&#10095;</span>
+    </div>
+</div>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const carousel = document.getElementById('client-carousel');
+        const prev = document.getElementById('prev-client');
+        const next = document.getElementById('next-client');
+
+        let scrollAmount = 0;
+        const scrollStep = carousel.offsetWidth;
+
+        prev.addEventListener('click', () => {
+            carousel.scrollBy({ left: -scrollStep, behavior: 'smooth' });
+        });
+
+        next.addEventListener('click', () => {
+            carousel.scrollBy({ left: scrollStep, behavior: 'smooth' });
+        });
+    });
+</script>
+<style>
+  .client-carousel-HP {
+    scroll-behavior: smooth;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    display: flex;
+    gap: 1rem;
+    -ms-overflow-style: none;  /* IE/Edge */
+    scrollbar-width: none;     /* Firefox */
+}
+.client-carousel-HP::-webkit-scrollbar {
+    display: none;
+}
+
+.client-item-HP {
+    scroll-snap-align: start;
+    min-width: 33.3333%;
+}
+
+.nav-arrow-HP {
+    font-size: 2rem;
+    color: #00b894; /* ✅ Changed from black to green */
+    background: rgba(255, 255, 255, 0.8);
+    padding: 5px 12px;
+    border-radius: 50%;
+    cursor: pointer;
+    user-select: none;
+}
+
+.nav-arrow-HP:hover {
+    background: #00b894; /* Green background on hover */
+    color: #fff;          /* White arrow on hover */
+}
+
+</style>
 
     <!-- Contact Footer -->
     <div class="contact-footer-HP mb-4" style="background-image: url('./Banner For ( Get In Touch ).svg'); background-size: cover; background-position: center; height: 250px; font-size: 1.3rem;">
@@ -526,6 +580,5 @@
         </div>
     </div>
 </div>
-
 
 @endsection

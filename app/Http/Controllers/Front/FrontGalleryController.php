@@ -11,7 +11,6 @@ class FrontGalleryController extends Controller
 {
     public function index()
     {
-        $galleries = Gallery::all();
-        return view('front.gallery', compact('galleries'));
+        return view('front.gallery');
     }
 }

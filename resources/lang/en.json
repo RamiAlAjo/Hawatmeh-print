@@ -42,6 +42,12 @@
     "No image available": "No image available",
     "photo_album": "Photo Album",
      "product_description": "Products Description",
-     "Products": "Products"
+     "Products": "Products",
+     "no_description": "No description available",
+    "Welcome": "Welcome",
+    "Dashboard": "Dashboard",
+    "Video Gallery": "Video Gallery",
+    "untitled_video": "Untitled Video",
+    "our_photo_gallery": "Our Photo Gallery"
 
 }

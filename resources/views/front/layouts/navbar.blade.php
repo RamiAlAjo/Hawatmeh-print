@@ -306,11 +306,10 @@
             </a>
         </div>
 
-
         <nav class="navbar navbar-expand-lg navbar-light navbar-NA"
         dir="{{ app()->getLocale() === 'ar' ? 'rtl' : 'ltr' }}">
         <a class="navbar-brand navbar-brand-NA" href="{{ route('home') }}">
-            <img src="./Rectangle.svg" alt="Logo">
+            <img src="{{ asset('./Hawatmeh Logo.svg') }}" alt="Logo" style="transform: scale(2.1); margin-left:100%;">
         </a>
 
         <!-- Burger Menu -->
@@ -357,8 +356,9 @@
 
                 <!-- Search Button -->
                 <button id="search-toggle-NA">
-                    <i class="fas fa-search"></i>
-                </button>
+                    <i class="bi bi-search"></i>
+                  </button>
+
             </div>
         </div>
     </nav>
@@ -456,7 +456,4 @@ function toggleFlag() {
         flagText.textContent = "Arabic";
     }
 }
-
-
         </script>
-    </body>

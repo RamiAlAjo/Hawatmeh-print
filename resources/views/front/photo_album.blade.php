@@ -2,9 +2,11 @@
 
 @section('content')
 
-<x-banner :pageTitle="__('photo_album')" />
+<x-banner pageTitle="Photo Album" />
 
-<h1 class="text-start my-5 mx-4" style="color: #2E7D32; margin-bottom: 30px;">Photo Album</h1> <!-- Title Added -->
+<h1 class="text-start my-5 mx-4" style="color: #2E7D32; margin-bottom: 30px;">
+    {{ __("photo_album") }}
+</h1>
 
 <style>
     .PH_AL-card-container {
@@ -61,11 +63,16 @@
 <div class="PH_AL-card-container">
     <!-- Dynamically displaying the gallery cards -->
     @foreach ($photoGalleries as $photoGallery)
-        <div class="PH_AL-custom-card">
-            <img src="{{ Storage::url($photoGallery->album_cover) }}" alt="{{ $photoGallery->album_title_en }}" class="PH_AL-card-image">
-            <div class="PH_AL-gradient-overlay">{{ $photoGallery->album_title_en }}</div>
-        </div>
+        <a href="{{ route('photo.show', $photoGallery->id) }}" style="text-decoration: none; color: inherit;">
+            <div class="PH_AL-custom-card">
+                <img src="{{ Storage::url($photoGallery->album_cover) }}" alt="{{ $photoGallery->album_title_en }}" class="PH_AL-card-image">
+                <div class="PH_AL-gradient-overlay">
+                    {{ app()->getLocale() === 'ar' ? $photoGallery->album_title_ar : $photoGallery->album_title_en }}
+                </div>
+            </div>
+        </a>
     @endforeach
+
 </div>
 
 @endsection

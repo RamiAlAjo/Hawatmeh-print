@@ -32,7 +32,7 @@
                         <b class="caret"></b>
                     </a>
                     <ul class="collapse sub-menu" id="Homepage">
-                        <li><a class="sidenav-item-link" href="{{ route('admin.slider.create') }}"><span class="nav-text">Slider</span></a></li>
+                        <li><a class="sidenav-item-link" href="{{ route('admin.slider.index') }}"><span class="nav-text">Slider</span></a></li>
                         <li><a class="sidenav-item-link" href="{{ route('admin.about-section.index') }}"><span class="nav-text">About Us Section</span></a></li>
                     </ul>
                 </li>

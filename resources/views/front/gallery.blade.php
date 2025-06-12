@@ -2,8 +2,7 @@
 
 @section('content')
 
-<x-banner :pageTitle="__('gallery')" />
-
+<x-banner pageTitle="Gallery" />
 
 <style>
     .GA-card-container {
@@ -58,23 +57,30 @@
 </style>
 
 <div class="GA-card-container">
-    @foreach($galleries as $gallery)
-        <div class="GA-custom-card">
-            <img
-                src="{{ $gallery->gallery_image ? asset('storage/' . $gallery->gallery_image) : 'https://via.placeholder.com/350x460' }}"
-                alt="{{ app()->getLocale() === 'ar' ? $gallery->gallery_title_ar : $gallery->gallery_title_en }}"
-                class="GA-card-image"
-            >
-
-            <div class="GA-gradient-overlay">
-                {{
-                    app()->getLocale() === 'ar'
-                        ? ($gallery->gallery_title_ar ?? __('no_description'))
-                        : ($gallery->gallery_title_en ?? __('no_description'))
-                }}
-            </div>
+    <a href="{{ route('photo.index') }}" class="GA-custom-card" style="display: inline-block; text-decoration: none; color: inherit;">
+        <img
+            src="{{ asset('assets/placeholder.jpg') }}"
+            alt="{{ __('Photos') }}"
+            class="GA-card-image"
+            style="display: block; width: 100%;"
+        >
+        <div class="GA-gradient-overlay" style="pointer-events: none;">
+            {{ app()->getLocale() === 'ar' ? 'صور' : 'Photos' }}
         </div>
-    @endforeach
+    </a>
+
+    <a href="{{ route('video.index') }}" class="GA-custom-card" style="display: inline-block; text-decoration: none; color: inherit; margin-left: 20px;">
+        <img
+            src="{{ asset('assets/placeholder.jpg') }}"
+            alt="{{ __('Videos') }}"
+            class="GA-card-image"
+            style="display: block; width: 100%;"
+        >
+        <div class="GA-gradient-overlay" style="pointer-events: none;">
+            {{ app()->getLocale() === 'ar' ? 'فيديوهات' : 'Videos' }}
+        </div>
+    </a>
+
 </div>
 
 

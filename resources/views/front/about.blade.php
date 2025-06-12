@@ -5,11 +5,6 @@
 <x-banner pageTitle="{{ app()->getLocale() == 'ar' ? 'عنّا' : 'About Us' }}" />
 
     <style>
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            padding: 30px;
-            background: linear-gradient(to bottom, #f8f9fa, #e9ecef);
-        }
 
         /* Section Title Styles */
         .AB-section-title {

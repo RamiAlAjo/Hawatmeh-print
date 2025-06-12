@@ -6,11 +6,6 @@
 
 
 <style>
-    body {
-        font-family: 'Arial', sans-serif;
-        background-color: #f4f4f4;
-        color: #333;
-    }
 
     .CL-client-title {
         color: #00b894; /* This is a shade of green similar to the one in your image */

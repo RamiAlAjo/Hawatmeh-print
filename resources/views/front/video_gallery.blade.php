@@ -120,7 +120,10 @@
 </style>
 
 <div class="container py-5">
-    <h2 class="section-title">{{ $videoAlbum->album_title_en ?? 'Video Album' }}</h2>
+    <h2 class="section-title">
+        {{ app()->getLocale() === 'ar' ? ($videoAlbum->album_title_ar ?? _('messages.video_album')) : ($videoAlbum->album_title_en ?? _('messages.video_album')) }}
+    </h2>
+
 
     @if ($videos->count())
         <div class="video-album-section">
@@ -143,7 +146,11 @@
                         </div>
                     @endforeach
                     <div class="video-title">
-                        {{ $video->video_title_en ?? 'Untitled Video' }}
+                        {{ app()->getLocale() === 'ar'
+                            ? ($video->video_title_ar ?? __('untitled_video'))
+                            : ($video->video_title_en ?? __('untitled_video'))
+                        }}
+
                     </div>
                 </div>
             @endforeach

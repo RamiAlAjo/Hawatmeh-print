@@ -5,11 +5,6 @@
 <x-banner :pageTitle="__('product_description')" />
 
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            padding: 20px;
-            background-color: #fff;
-        }
 
         .section-title.PRO_DESC {
             color: #2E7D32;

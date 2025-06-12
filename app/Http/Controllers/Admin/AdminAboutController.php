@@ -98,8 +98,16 @@ class AdminAboutController extends Controller
     public function edit($id)
     {
         $aboutUs = AboutUs::findOrFail($id);
+
+        // Decode JSON strings into arrays
+        $aboutUs->services_card_title_en = json_decode($aboutUs->services_card_title_en, true) ?? [];
+        $aboutUs->services_card_description_en = json_decode($aboutUs->services_card_description_en, true) ?? [];
+        $aboutUs->services_card_title_ar = json_decode($aboutUs->services_card_title_ar, true) ?? [];
+        $aboutUs->services_card_description_ar = json_decode($aboutUs->services_card_description_ar, true) ?? [];
+
         return view('admin.about.edit', compact('aboutUs'));
     }
+
 
     // Update the About Us page in the database
 public function update(Request $request, $id)

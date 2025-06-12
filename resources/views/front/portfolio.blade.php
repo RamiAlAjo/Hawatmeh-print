@@ -22,7 +22,7 @@
                         <!-- Check if a resume exists, and render it accordingly -->
                         @if($portfolio->resume)
                             <div class="iframe-container" style="display: flex; justify-content: center; align-items: center; height: 500px; overflow: hidden;">
-                                <iframe src="{{ asset('/tokyo/storage/app/public/' . $portfolio->resume) }}" style="width: 100%; height: 100%; border: none;"></iframe>
+                                <iframe src="{{ asset('storage/' . $portfolio->resume) }}" style="width: 100%; height: 100%; border: none;"></iframe>
                             </div>
                         @else
                             <p class="text-muted">{{ app()->getLocale() == 'ar' ? 'لا توجد سيرة ذاتية مرفقة.' : 'No resume uploaded.' }}</p> <!-- Translated message when no resume is available -->
