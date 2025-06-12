@@ -41,8 +41,10 @@ Route::middleware([
     Route::get('lang/{locale}', function ($locale) {
         if (in_array($locale, ['en', 'ar'])) {
             session(['locale' => $locale]);
+            app()->setLocale($locale); // Optional but can help during redirect
         }
-        return redirect()->back();
+
+        return redirect(url()->previous());
     })->name('change.language');
 
 

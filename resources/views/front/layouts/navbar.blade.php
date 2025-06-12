@@ -283,28 +283,29 @@
 }
     </style>
 
-    <body>
-        <div class="green-space-NA" style="width: 100%; display: flex; justify-content: flex-end; padding: 10px;">
-            <a href="{{ route('change.language', app()->getLocale() === 'ar' ? 'en' : 'ar') }}"
-               class="language-section-NA"
-               style="cursor: pointer; display: flex; align-items: center;">
+<div class="green-space-NA"
+style="width: 100%; display: flex; justify-content: {{ app()->getLocale() === 'ar' ? 'flex-start' : 'flex-end' }}; padding: 10px;">
 
-                <span class="language-text-NA">
-                    {{ app()->getLocale() === 'ar' ? 'English' : 'العربية' }}
-                </span>
+<a href="{{ route('change.language', app()->getLocale() === 'ar' ? 'en' : 'ar') }}"
+  class="language-section-NA"
+  style="cursor: pointer; display: flex; align-items: center;">
 
-                <img
-                    id="language-flag-NA"
-                    src="{{ app()->getLocale() === 'ar'
-                        ? 'https://upload.wikimedia.org/wikipedia/en/thumb/a/ae/Flag_of_the_United_Kingdom.svg/330px-Flag_of_the_United_Kingdom.svg.png'
-                        : 'https://upload.wikimedia.org/wikipedia/commons/thumb/c/c0/Flag_of_Jordan.svg/320px-Flag_of_Jordan.svg.png' }}"
-                    alt="Language Flag"
-                    class="language-flag-NA"
-                    style="width: 32px; height: 20px; margin-left: 8px;"
-                >
+   <span class="language-text-NA">
+       {{ app()->getLocale() === 'ar' ? 'English' : 'العربية' }}
+   </span>
 
-            </a>
-        </div>
+   <img
+       id="language-flag-NA"
+       src="{{ app()->getLocale() === 'ar'
+           ? 'https://upload.wikimedia.org/wikipedia/en/thumb/a/ae/Flag_of_the_United_Kingdom.svg/330px-Flag_of_the_United_Kingdom.svg.png'
+           : 'https://upload.wikimedia.org/wikipedia/commons/thumb/c/c0/Flag_of_Jordan.svg/320px-Flag_of_Jordan.svg.png' }}"
+       alt="Language Flag"
+       class="language-flag-NA"
+       style="width: 32px; height: 20px; margin-left: 8px;"
+   >
+
+</a>
+</div>
 
         <nav class="navbar navbar-expand-lg navbar-light navbar-NA"
         dir="{{ app()->getLocale() === 'ar' ? 'rtl' : 'ltr' }}">
