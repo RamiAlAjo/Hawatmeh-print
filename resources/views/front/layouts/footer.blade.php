@@ -5,13 +5,14 @@
     padding: 30px 15px;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   }
+
   .FO-footer .FO-logo img,
   .FO-footer .FO-right-img img {
     max-height: 140px;
   }
   .FO-footer .FO-quick-links h5 {
     font-weight: bold;
-    font-size: 22px;
+    font-size: 26px;
     margin-bottom: 20px;
   }
   .FO-footer .FO-quick-links a {
@@ -19,7 +20,7 @@
     color: #fff;
     text-decoration: none;
     margin: 5px 0;
-    font-size: 18px;
+    font-size: 20px;
   }
   .FO-footer .FO-quick-links a:hover {
     text-decoration: underline;
@@ -106,22 +107,33 @@
 </div>
 
 
-
 <!-- Right Side: Full Image (includes Arabic text) -->
-<div class="col-md-3 FO-right-img mb-3 mb-md-0 text-md-start text-center">
-    <img src="{{ asset('./new logo.jpeg') }}" alt="Support Logos" class="img-fluid" style="transform: scale(1.2); margin-bottom: 5%;">
+<div class="col-md-3 FO-right-img mb-3 mb-md-0 text-center">
+    <img src="{{ asset('new logo.jpeg') }}" alt="Support Logos" class="img-fluid" style="transform: scale(1.2); margin-bottom: 5%;">
 
+    <!-- Centered "Follow Us" Section -->
+    <div class="d-flex flex-column align-items-center gap-2">
+        <div class="FO-social-text">Follow Us</div>
+        @php
+        $settings = \App\Models\WebsiteSetting::first(); // Adjust if you have multiple rows
+    @endphp
 
-    <div class="d-flex align-items-center justify-content-md-start justify-content-center gap-2">
-      <div class="FO-social-text">Follow Us</div>
-      <div class="FO-social-icons d-flex gap-2">
-        <i class="bi bi-facebook"></i>
-        <i class="bi bi-instagram"></i>
-      </div>
+    <!-- Social Icons (conditionally rendered) -->
+    <div class="FO-social-icons d-flex gap-2 justify-content-center">
+        @if(!empty($settings?->facebook))
+            <a href="{{ $settings->facebook }}" target="_blank" class="text-decoration-none text-dark">
+                <i class="bi bi-facebook"></i>
+            </a>
+        @endif
+
+        @if(!empty($settings?->instagram))
+            <a href="{{ $settings->instagram }}" target="_blank" class="text-decoration-none text-dark">
+                <i class="bi bi-instagram"></i>
+            </a>
+        @endif
     </div>
-  </div>
-
 
     </div>
-  </div>
+</div>
+
 </footer>

@@ -15,4 +15,8 @@
     body, * {
         font-family: 'Ramsey Test ExtraLight Condensed', sans-serif !important;
     }
+
+    p {
+    font-size: 1.5rem; /* You can adjust this value */
+}
 </style>

@@ -15,13 +15,13 @@
 /* Style for the carousel caption */
 .carousel-caption-HP {
     position: absolute;
-    bottom: 20%; /* Position the caption towards the bottom */
+    bottom: 40%; /* Position the caption towards the bottom */
     left: 50%;
     transform: translateX(-50%);
     text-align: center;
     color: #fff;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.6); /* Adds a shadow for better readability */
-    background-color: rgba(0, 0, 0, 0.5); /* Dark background behind the text */
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.6);
+    /* background-color: rgba(0, 0, 0, 0.5);  */
     padding: 10px;
     border-radius: 8px;
 }
