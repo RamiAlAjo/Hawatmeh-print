@@ -1,130 +1,243 @@
 <style>
-  .FO-footer {
-    background: linear-gradient(to right, #a3d4a4, #0a6d2d);
-    color: #fff;
-    padding: 30px 15px;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    .FO-footer {
+      background: linear-gradient(to right, #a3d4a4, #0a6d2d);
+      color: #fff;
+      padding: 30px 15px;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    .FO-footer .FO-logo img,
+    .FO-footer .FO-right-img img {
+      max-height: 140px;
+      width: auto; /* Keeps the aspect ratio intact */
+    }
+
+    .FO-footer .FO-quick-links h5 {
+      font-weight: bold;
+      font-size: 26px;
+      margin-bottom: 20px;
+    }
+
+    .FO-footer .FO-quick-links a {
+      display: block;
+      color: #fff;
+      text-decoration: none;
+      margin: 5px 0;
+      font-size: 20px;
+    }
+
+    .FO-footer .FO-quick-links a:hover {
+      text-decoration: underline;
+    }
+
+    .FO-visitor-counter {
+      font-size: 18px;
+      margin-top: 15px;
+    }
+
+    .FO-counter-box {
+      display: inline-block;
+      background-color: #1b5e20;
+      padding: 5px 8px;
+      margin: 0 2px;
+      border-radius: 4px;
+      font-weight: bold;
+    }
+
+    .FO-social-icons i {
+      font-size: 24px;
+      margin: 0 5px;
+      color: white;
+    }
+
+    .FO-copyright {
+      font-size: 14px;
+      margin-top: 20px;
+      text-align: center;
+    }
+
+    .FO-social-text {
+      font-size: 14px;
+      margin-top: 10px;
+    }
+
+    .custom-width {
+      max-width: 300px;
+      margin-left: auto;
+      margin-right: auto;
+      text-align: center;
+    }
+
+    @media (max-width: 767px) {
+      .FO-footer {
+        text-align: center;
+        padding: 20px 10px;
+      }
+
+      .FO-footer .FO-logo img,
+      .FO-footer .FO-right-img img {
+        max-height: 100px;
+        margin: 0 auto;
+      }
+
+      .FO-footer .FO-quick-links {
+        margin-top: 20px;
+      }
+
+      .FO-footer .FO-quick-links h5 {
+        font-size: 22px;
+        margin-bottom: 15px;
+      }
+
+      .FO-footer .FO-quick-links a {
+        font-size: 18px;
+        margin: 4px 0;
+      }
+
+      .FO-footer .FO-quick-links .row {
+        flex-direction: column;
+      }
+
+      .FO-footer .FO-quick-links .col {
+        margin-bottom: 10px;
+      }
+
+      .FO-social-icons {
+        justify-content: center;
+      }
+
+      .FO-social-icons i {
+        font-size: 22px;
+        margin: 0 8px;
+      }
+
+      .FO-visitor-counter {
+        font-size: 16px;
+        margin-top: 10px;
+      }
+
+      .FO-counter-box {
+        padding: 4px 6px;
+        margin: 0 1px;
+        font-size: 14px;
+      }
+
+      .custom-width {
+        max-width: 100%;
+        padding: 0 10px;
+      }
+
+      /* New Adjustments for Smaller Screens */
+      .FO-footer .FO-logo img {
+        max-width: 80%; /* Adjust logo size */
+        transform: scale(1); /* Ensure the logo is not too large */
+      }
+
+      .FO-social-icons i {
+        font-size: 20px;
+        margin: 0 6px;
+      }
+
+      /* Adjust visitor counter for small screens */
+      .FO-visitor-counter {
+        font-size: 14px;
+        text-align: center;
+      }
+
+      .FO-counter-box {
+        padding: 4px 8px;
+        font-size: 14px;
+      }
+
+      /* Ensure the Follow Us section is centered and responsive */
+      .FO-social-text {
+        font-size: 12px;
+        margin-top: 10px;
+      }
+
+      /* Margin adjustments for mobile */
+      .FO-footer .FO-copyright {
+        font-size: 12px;
+        margin-top: 10px;
+      }
+    }
+
+     /* Enhance the Visitor Counter with smoother animation */
+  .FO-visitor-counter {
+    font-size: 20px;
+    margin-top: 20px;
+    text-align: center;
+    position: relative;
   }
 
-  .FO-footer .FO-logo img,
-  .FO-footer .FO-right-img img {
-    max-height: 140px;
-  }
-  .FO-footer .FO-quick-links h5 {
-    font-weight: bold;
-    font-size: 26px;
-    margin-bottom: 20px;
-  }
-  .FO-footer .FO-quick-links a {
-    display: block;
-    color: #fff;
-    text-decoration: none;
-    margin: 5px 0;
-    font-size: 20px;
-  }
-  .FO-footer .FO-quick-links a:hover {
-    text-decoration: underline;
-  }
-  .FO-visitor-counter {
-    font-size: 18px;
-    margin-top: 15px;
-  }
   .FO-counter-box {
     display: inline-block;
     background-color: #1b5e20;
-    padding: 5px 8px;
-    margin: 0 2px;
-    border-radius: 4px;
-    font-weight: bold;
-  }
-  .FO-social-icons i {
-    font-size: 24px;
+    padding: 8px 12px;
     margin: 0 5px;
-    color: white;
-  }
-  .FO-copyright {
-    font-size: 14px;
-    margin-top: 20px;
-    text-align: center;
-  }
-  .FO-social-text {
-    font-size: 14px;
-    margin-top: 10px;
+    border-radius: 6px;
+    font-weight: bold;
+    font-size: 24px;
+    color: #fff;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease-in-out;
   }
 
-  .FO-social-icons i {
-  font-size: 24px;
-  color: white;
-  margin-right: 5px;
-}
-.custom-width {
-    max-width: 300px;     /* Or use 30% if you want fluid width */
-    margin-left: auto;
-    margin-right: auto;
-    text-align: center;   /* Optional: centers text inside */
-}
-
-@media (max-width: 767px) {
-  .FO-footer {
-    text-align: center;
-    padding: 20px 10px;
+  /* Hover effect on the counter numbers for interaction */
+  .FO-counter-box:hover {
+    transform: scale(1.1);
+    background-color: #2e7d32;  /* Slightly darker when hovered */
   }
 
-  .FO-footer .FO-logo img,
-  .FO-footer .FO-right-img img {
-    max-height: 100px;
-    transform: scale(1.2);
-    margin: 0 auto;
-  }
-
-  .FO-footer .FO-quick-links {
-    margin-top: 20px;
-  }
-
-  .FO-footer .FO-quick-links h5 {
-    font-size: 22px;
-    margin-bottom: 15px;
-  }
-
-  .FO-footer .FO-quick-links a {
-    font-size: 18px;
-    margin: 4px 0;
-  }
-
-  .FO-footer .FO-quick-links .row {
-    flex-direction: column;
-  }
-
-  .FO-footer .FO-quick-links .col {
-    margin-bottom: 10px;
-  }
-
-  .FO-social-icons {
+  /* Add some visual enhancements to the overall container */
+  .visitor-count-container {
+    display: inline-flex;
+    align-items: center;
     justify-content: center;
+    gap: 6px;
   }
 
-  .FO-social-icons i {
-    font-size: 22px;
-    margin: 0 8px;
+  /* Style the label of the counter */
+  .FO-visitor-counter .fw-bold {
+    font-size: 20px;
+    margin-right: 10px;
+    color: #ffffff;
+    font-weight: normal;
   }
 
-  .FO-visitor-counter {
-    font-size: 16px;
-    margin-top: 10px;
+  /* Mobile responsiveness for the visitor counter */
+  @media (max-width: 767px) {
+    .FO-visitor-counter {
+      font-size: 18px;
+      margin-top: 15px;
+    }
+
+    .FO-counter-box {
+      padding: 6px 10px;
+      font-size: 20px;
+    }
+
+    .visitor-count-container {
+      gap: 4px;
+    }
   }
 
-  .FO-counter-box {
-    padding: 4px 6px;
-    margin: 0 1px;
-    font-size: 14px;
+  /* Animations for the counter digits */
+  @keyframes countUp {
+    0% {
+      transform: translateY(20px);
+      opacity: 0;
+    }
+    50% {
+      transform: translateY(-10px);
+      opacity: 1;
+    }
+    100% {
+      transform: translateY(0);
+      opacity: 1;
+    }
   }
-
-  .custom-width {
-    max-width: 100%;
-    padding: 0 10px;
-  }
-}
-</style>
+  </style>
 
 <footer class="FO-footer">
   <div class="container-fluid">
@@ -137,13 +250,14 @@
         <div class="FO-visitor-counter mt-2" aria-label="Visitor counter" role="group">
             <span class="fw-bold">Visitors</span>
             <span class="visually-hidden">Visitor count is</span>
-            <span class="FO-counter-box" data-digit="1">0</span>
-            <span class="FO-counter-box" data-digit="2">0</span>
-            <span class="FO-counter-box" data-digit="3">0</span>
-            <span class="FO-counter-box" data-digit="4">0</span>
-            <span class="FO-counter-box" data-digit="5">0</span>
+            <div class="visitor-count-container">
+              <span class="FO-counter-box" data-digit="1">0</span>
+              <span class="FO-counter-box" data-digit="2">0</span>
+              <span class="FO-counter-box" data-digit="3">0</span>
+              <span class="FO-counter-box" data-digit="4">0</span>
+              <span class="FO-counter-box" data-digit="5">0</span>
+            </div>
           </div>
-
       </div>
 
 <!-- Center: Quick Links -->
@@ -216,6 +330,3 @@
       });
     });
   </script>
-
-
-</footer>

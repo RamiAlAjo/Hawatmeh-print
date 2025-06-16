@@ -131,8 +131,9 @@
                                                         <td>{!! $product->description_ar !!}</td>
                                                         <td>
                                                             @if($product->image)
-                                                                <img src="{{ asset('storage/' . $product->image) }}" width="80" height="80" alt="Image of {{ $product->title_ar }}">
-                                                            @else
+                                                                <img src="{{ asset('storage/app/public/' . $product->image) }}" width="80" height="80" alt="Image of {{ $product->title_ar }}">
+                                                                {{-- https://hprinting.jordansolutionsjo.com/hawatmeh/storage/app/public/products/ --}}
+                                                                @else
                                                                 No image available
                                                             @endif
                                                         </td>
