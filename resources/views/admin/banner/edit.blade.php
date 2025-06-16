@@ -11,41 +11,16 @@
                             @method('PUT')
                             @csrf
                             <ul class="nav nav-tabs mb-3" id="banner-tab" role="tablist">
+                                <!-- Image Tab (Only keep this tab for image handling) -->
                                 <li class="nav-item">
-                                    <a class="nav-link active" id="tab-en" data-toggle="pill" href="#tab-content-en"
-                                       role="tab" aria-controls="tab-content-en" aria-selected="true">English</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" id="tab-ar" data-toggle="pill" href="#tab-content-ar"
-                                       role="tab" aria-controls="tab-content-ar" aria-selected="false">Arabic</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" id="tab-image" data-toggle="pill" href="#tab-content-image"
-                                       role="tab" aria-controls="tab-content-image" aria-selected="false">Image</a>
+                                    <a class="nav-link active" id="tab-image" data-toggle="pill" href="#tab-content-image"
+                                       role="tab" aria-controls="tab-content-image" aria-selected="true">Image</a>
                                 </li>
                             </ul>
 
                             <div class="tab-content" id="banner-tab-content">
-                                <!-- English Tab -->
-                                <div class="tab-pane fade show active" id="tab-content-en" role="tabpanel" aria-labelledby="tab-en">
-                                    <div class="form-group">
-                                        <label class="form-label" for="title_en">Banner Title (EN)</label>
-                                        <input type="text" class="form-control" name="title_en" id="title_en" placeholder="Enter banner title" value="{{ $banner->title_en }}">
-                                    </div>
-                                </div>
-
-                                <!-- Arabic Tab -->
-                                <div class="tab-pane fade" id="tab-content-ar" role="tabpanel" aria-labelledby="tab-ar">
-                                    <div class="text-right" dir="rtl">
-                                        <div class="form-group">
-                                            <label class="form-label" for="title_ar">عنوان البانر</label>
-                                            <input type="text" class="form-control" name="title_ar" id="title_ar" placeholder="أدخل عنوان البانر" value="{{ $banner->title_ar }}">
-                                        </div>
-                                    </div>
-                                </div>
-
                                 <!-- Image Tab -->
-                                <div class="tab-pane fade" id="tab-content-image" role="tabpanel" aria-labelledby="tab-image">
+                                <div class="tab-pane fade show active" id="tab-content-image" role="tabpanel" aria-labelledby="tab-image">
                                     <div class="form-group">
                                         <label for="image">Upload New Image</label>
                                         <input id="image" type="file" class="form-control" name="image">

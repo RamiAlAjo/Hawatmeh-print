@@ -45,7 +45,7 @@
                         <b class="caret"></b>
                     </a>
                     <ul class="collapse sub-menu" id="banner">
-                        <li><a class="sidenav-item-link" href="{{ route('admin.banner.create') }}"><span class="nav-text">Banner</span></a></li>
+                        <li><a class="sidenav-item-link" href="{{ route('admin.banner.index') }}"><span class="nav-text">Banner</span></a></li>
                     </ul>
                 </li>
 
@@ -162,18 +162,24 @@
             </ul>
         </div>
 
-        <!-- Sidebar Footer -->
-        <div class="sidebar-footer">
-            <div class="sidebar-footer-content">
-                <ul class="d-flex">
-                    <li>
-                        <a href="{{ route('admin.setting.index') }}" data-toggle="tooltip" title="Profile settings">
-                            <span class="material-icons">settings</span>
-                        </a>
-                    </li>
-                </ul>
-            </div>
-        </div>
+       <!-- Sidebar Footer -->
+<div class="sidebar-footer">
+    <div class="sidebar-footer-content">
+        <ul class="d-flex">
+            <li>
+                <a href="{{ route('admin.setting.index') }}" data-toggle="tooltip" title="Website Settings">
+                    <span class="material-icons">settings</span>
+                </a>
+            </li>
+            <li>
+                <a  href="/" data-toggle="tooltip" title="Home">
+                    <span class="material-icons" style="margin-left: 4px;">home</span>
+                </a>
+            </li>
+        </ul>
+    </div>
+</div>
+
     </div>
 </aside>
 

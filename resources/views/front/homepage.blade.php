@@ -195,45 +195,52 @@
         cursor: pointer;
     }
 
-    /* Contact Footer Section */
-    .contact-footer-HP {
-        background-color: rgba(46, 125, 50, 0.8); /* Fallback solid color */
-        color: white;
-        /* padding: 30px; */
-        border-radius: 10px;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        background-size: cover;
-        background-position: center;
-    }
+   /* Contact Footer Section */
+.contact-footer-HP {
+    background-color: rgba(46, 125, 50, 0.8); /* Fallback solid color */
+    color: white;
+    /* padding: 20px; */
+    border-radius: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-size: cover;
+    background-position: center;
+}
 
-    .contact-title-HP {
-        font-size: 1.8rem;
-        font-weight: 600;
-    }
+/* Smaller Title Font */
+.contact-title-HP {
+    font-size: 1.5rem; /* Reduced font size */
+    font-weight: 600;
+}
 
-    .contact-info-HP {
-        text-align: right;
-    }
+/* Contact Info Styling */
+.contact-info-HP {
+    text-align: right;
+}
 
-    .contact-item-HP {
-        margin-bottom: 10px;
-        display: flex;
-        align-items: center;
-        justify-content: flex-end;
-    }
+/* Contact Item Styling */
+.contact-item-HP {
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+}
 
-    .contact-icon-HP {
-        margin-left: 10px;
-        font-size: 1.2rem;
-    }
+/* Icon Font Size */
+.contact-icon-HP {
+    margin-left: 10px;
+    font-size: 1rem; /* Reduced icon size */
+}
 
-    .company-website-HP {
-        text-align: right;
-        font-weight: 500;
-        margin-top: 20px;
-    }
+/* Company Website Section */
+.company-website-HP {
+    text-align: right;
+    font-weight: 500;
+    margin-top: 20px;
+    font-size: 1rem; /* Reduced font size */
+}
+
 
     /* Media Queries */
     @media (max-width: 1200px) {
@@ -542,43 +549,106 @@
 
 </style>
 
-    <!-- Contact Footer -->
-    <div class="contact-footer-HP mb-4" style="background-image: url('./Banner For ( Get In Touch ).svg'); background-size: cover; background-position: center; height: 250px; font-size: 1.3rem;">
-        <div class="container h-100">
-            <div class="row h-100 align-items-center">
-                <div class="col-md-6">
-                    <div class="contact-title-HP" style="font-size: 2.5rem; text-align: left; color: white;">
-                        {{ __('Get In Touch') }}
-                    </div>
+   <!-- Contact Footer -->
+<div class="contact-footer-HP mb-4" style="background-image: url('./Banner For ( Get In Touch ).svg'); background-size: cover; background-position: center; height: 250px; font-size: 1.3rem;">
+    <div class="container h-100">
+        <div class="row h-100 align-items-center">
+            <div class="col-md-6">
+                <div class="contact-title-HP" style="font-size: 2.5rem; text-align: left; color: white;">
+                    {{ __('Get In Touch') }}
                 </div>
-                <div class="col-md-6 d-flex flex-column justify-content-center">
-                    <div class="contact-info-HP text-center text-md-start" style="color: white;">
-                        <div class="contact-item-HP d-flex align-items-center mb-2 justify-content-center justify-content-md-start">
-                            <i class="bi bi-envelope contact-icon-HP me-2"></i>
-                            <a href="mailto:{{ $globalsettings->contact_email ?? 'info@companyname.com' }}" class="text-white text-decoration-none">
-                                {{ $globalsettings->contact_email ?? 'info@companyname.com' }}
-                            </a>
-                        </div>
+            </div>
+            <div class="col-md-6 d-flex flex-column justify-content-center">
+                <div class="contact-info-HP text-center text-md-start" style="color: white;">
+                    <!-- Email Section -->
+                    <div class="contact-item-HP d-flex align-items-center mb-2 justify-content-center justify-content-md-start">
+                        <i class="bi bi-envelope contact-icon-HP me-2"></i>
+                        <a href="mailto:{{ $globalsettings->contact_email ?? 'info@companyname.com' }}" class="text-white text-decoration-none">
+                            {{ $globalsettings->contact_email ?? 'info@companyname.com' }}
+                        </a>
+                    </div>
+
+                    <!-- Loop through the phone numbers if they exist -->
+                    @if ($globalsettings->phone)
+                        @php
+                            $phones = json_decode($globalsettings->phone, true); // Decode into array
+                        @endphp
+                        @if (is_array($phones))  <!-- Check if it's a valid array -->
+                            @foreach ($phones as $phone)
+                                <div class="contact-item-HP d-flex align-items-center mb-2 justify-content-center justify-content-md-start">
+                                    <i class="bi bi-telephone contact-icon-HP me-2"></i>
+                                    <a href="tel:{{ $phone }}" class="text-white text-decoration-none">
+                                        {{ $phone }}
+                                    </a>
+                                </div>
+                            @endforeach
+                        @else
+                            <!-- If it's not an array, display the phone directly -->
+                            <div class="contact-item-HP d-flex align-items-center mb-2 justify-content-center justify-content-md-start">
+                                <i class="bi bi-telephone contact-icon-HP me-2"></i>
+                                <a href="tel:{{ $globalsettings->phone }}" class="text-white text-decoration-none">
+                                    {{ $globalsettings->phone }}
+                                </a>
+                            </div>
+                        @endif
+                    @else
+                        <!-- Fallback if no phone numbers are available -->
                         <div class="contact-item-HP d-flex align-items-center mb-2 justify-content-center justify-content-md-start">
                             <i class="bi bi-telephone contact-icon-HP me-2"></i>
                             <a href="tel:{{ $globalsettings->phone ?? '+053845777' }}" class="text-white text-decoration-none">
                                 {{ $globalsettings->phone ?? '(05) 384 5777' }}
                             </a>
                         </div>
+                    @endif
+
+                    <!-- Loop through the fax numbers if they exist -->
+                    @if ($globalsettings->fax)
+                        @php
+                            $faxes = json_decode($globalsettings->fax, true); // Decode into array
+                        @endphp
+                        @if (is_array($faxes))  <!-- Check if it's a valid array -->
+                            @foreach ($faxes as $fax)
+                                <div class="contact-item-HP d-flex align-items-center mb-2 justify-content-center justify-content-md-start">
+                                    <i class="bi bi-printer contact-icon-HP me-2"></i>
+                                    <a href="fax:{{ $fax }}" class="text-white text-decoration-none">
+                                        {{ $fax }}
+                                    </a>
+                                </div>
+                            @endforeach
+                        @else
+                            <!-- If it's not an array, display the fax directly -->
+                            <div class="contact-item-HP d-flex align-items-center mb-2 justify-content-center justify-content-md-start">
+                                <i class="bi bi-printer contact-icon-HP me-2"></i>
+                                <span>{{ $globalsettings->fax }}</span>
+                            </div>
+                        @endif
+                    @else
+                        <!-- Fallback if no fax numbers are available -->
                         <div class="contact-item-HP d-flex align-items-center mb-2 justify-content-center justify-content-md-start">
-                            <i class="bi bi-geo-alt contact-icon-HP me-2"></i>
-                            <span>{{ $globalsettings->address ?? '4366+FPH, Zarqa' }}</span>
+                            <i class="bi bi-printer contact-icon-HP me-2"></i>
+                            <span>{{ $globalsettings->fax ?? 'No Fax Available' }}</span>
                         </div>
+                    @endif
+
+                    <!-- Address Section -->
+                    <div class="contact-item-HP d-flex align-items-center mb-2 justify-content-center justify-content-md-start">
+                        <i class="bi bi-geo-alt contact-icon-HP me-2"></i>
+                        <span>{{ $globalsettings->address ?? '4366+FPH, Zarqa' }}</span>
                     </div>
-                    <div class="company-website-HP text-end" style="color: white;">
-                        <a href="{{ $globalsettings->url ?? 'https://www.companyname.com' }}" class="text-white text-decoration-none">
-                            {{ $globalsettings->url ?? 'www.companyname.com' }}
-                        </a>
-                    </div>
+                </div>
+
+                <!-- Company Website -->
+                <div class="company-website-HP text-end" style="color: white;">
+                    <a href="{{ $globalsettings->url ?? 'https://www.companyname.com' }}" class="text-white text-decoration-none">
+                        {{ $globalsettings->url ?? 'www.companyname.com' }}
+                    </a>
                 </div>
             </div>
         </div>
     </div>
+</div>
+
+
 </div>
 
 @endsection

@@ -11,14 +11,16 @@ class WebsiteSetting extends Model
 
     protected $table = "website_settings";
 
-    // Fields to be mass-assigned
     protected $fillable = [
         'facebook',
         'instagram',
         'twitter',
         'youtube',
         'phone',
+        'phone2',    // Add phone2
+        'phone3',    // Add phone3
         'email',
+        'fax',
         'logo',
         'address',
         'url',

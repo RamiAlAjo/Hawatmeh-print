@@ -24,74 +24,75 @@ class AdminAboutController extends Controller
     }
 
     // Store a newly created About Us page in the database
-   public function store(Request $request)
-{
-    // Validate the incoming request data
-    $request->validate([
-        'about_us_description_en' => 'nullable|string',
-        'about_us_description_ar' => 'nullable|string',
-        'images' => 'nullable|array', // Multiple images (optional)
-        'images.*' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg', // Ensure all files are images
+    public function store(Request $request)
+    {
+        // Check if there's already an "About Us" entry
+        $existingAboutUs = AboutUs::first(); // Fetch the first entry (or only entry)
 
-        // Goals Section
-        'goals_main_title_en' => 'nullable|string',
-        'goals_main_title_ar' => 'nullable|string',
-        'goals_title_en' => 'nullable|string',
-        'goals_description_en' => 'nullable|string',
-        'goals_title_ar' => 'nullable|string',
-        'goals_description_ar' => 'nullable|string',
+        // If there is an existing record, prevent creating another one
+        if ($existingAboutUs) {
+            return redirect()->route('admin.about.index')->with('error', 'Only one About Us page can be created.');
+        }
 
-        // Services Section
-        // Limit the number of service cards to 3
-        'services_card_title_en' => 'nullable|array|max:3',
-        'services_card_title_en.*' => 'nullable|string|max:255',
-        'services_card_description_en' => 'nullable|array|max:3',
-        'services_card_description_en.*' => 'nullable|string|max:1000',
+        // Validate the incoming request data
+        $request->validate([
+            'about_us_description_en' => 'nullable|string',
+            'about_us_description_ar' => 'nullable|string',
+            'images' => 'nullable|array', // Multiple images (optional)
+            'images.*' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg', // Ensure all files are images
 
-        'services_card_title_ar' => 'nullable|array|max:3',
-        'services_card_title_ar.*' => 'nullable|string|max:255',
-        'services_card_description_ar' => 'nullable|array|max:3',
-        'services_card_description_ar.*' => 'nullable|string|max:1000',
-    ]);
+            // Goals Section
+            'goals_main_title_en' => 'nullable|string',
+            'goals_main_title_ar' => 'nullable|string',
+            'goals_title_en' => 'nullable|string',
+            'goals_description_en' => 'nullable|string',
+            'goals_title_ar' => 'nullable|string',
+            'goals_description_ar' => 'nullable|string',
 
-    // Handle multiple images upload
-    $imagesPath = null;
-    if ($request->hasFile('images')) {
-        // Store each image and return an array of paths, then encode it as a JSON string
-        $imagesPath = json_encode(array_map(function ($image) {
-            return $image->store('about_us', 'public'); // Store image and return its path
-        }, $request->file('images')));
+            // Services Section
+            // Limit the number of service cards to 3
+            'services_card_title_en' => 'nullable|array|max:3',
+            'services_card_title_en.*' => 'nullable|string|max:255',
+            'services_card_description_en' => 'nullable|array|max:3',
+            'services_card_description_en.*' => 'nullable|string|max:1000',
+
+            'services_card_title_ar' => 'nullable|array|max:3',
+            'services_card_title_ar.*' => 'nullable|string|max:255',
+            'services_card_description_ar' => 'nullable|array|max:3',
+            'services_card_description_ar.*' => 'nullable|string|max:1000',
+        ]);
+
+        // Handle multiple images upload
+        $imagesPath = null;
+        if ($request->hasFile('images')) {
+            // Store each image and return an array of paths, then encode it as a JSON string
+            $imagesPath = json_encode(array_map(function ($image) {
+                return $image->store('about_us', 'public'); // Store image and return its path
+            }, $request->file('images')));
+        }
+
+        // Create and store the About Us data in the database
+        AboutUs::create([
+            'about_us_description_en' => $request->input('about_us_description_en'),
+            'about_us_description_ar' => $request->input('about_us_description_ar'),
+            'images' => $imagesPath,
+            'goals_main_title_en' => $request->input('goals_main_title_en'),
+            'goals_main_title_ar' => $request->input('goals_main_title_ar'),
+            'goals_title_en' => $request->input('goals_title_en'),
+            'goals_description_en' => $request->input('goals_description_en'),
+            'goals_title_ar' => $request->input('goals_title_ar'),
+            'goals_description_ar' => $request->input('goals_description_ar'),
+
+            // Store multiple services cards
+            'services_card_title_en' => json_encode($request->input('services_card_title_en', [])),
+            'services_card_description_en' => json_encode($request->input('services_card_description_en', [])),
+            'services_card_title_ar' => json_encode($request->input('services_card_title_ar', [])),
+            'services_card_description_ar' => json_encode($request->input('services_card_description_ar', [])),
+        ]);
+
+        // Redirect to the About Us page with a success message
+        return redirect()->route('admin.about.index')->with('success', 'About Us page created successfully!');
     }
-
-    // Handle the services card image upload (if any)
-    $servicesCardImagePath = null;
-    if ($request->hasFile('services_card_image')) {
-        // Store the uploaded services card image and get its path
-        $servicesCardImagePath = $request->file('services_card_image')->store('about_us', 'public');
-    }
-
-    // Create and store the About Us data in the database
-    AboutUs::create([
-        'about_us_description_en' => $request->input('about_us_description_en'),
-        'about_us_description_ar' => $request->input('about_us_description_ar'),
-        'images' => $imagesPath,
-        'goals_main_title_en' => $request->input('goals_main_title_en'),
-        'goals_main_title_ar' => $request->input('goals_main_title_ar'),
-        'goals_title_en' => $request->input('goals_title_en'),
-        'goals_description_en' => $request->input('goals_description_en'),
-        'goals_title_ar' => $request->input('goals_title_ar'),
-        'goals_description_ar' => $request->input('goals_description_ar'),
-
-        // Store multiple services cards
-        'services_card_title_en' => json_encode($request->input('services_card_title_en', [])),
-        'services_card_description_en' => json_encode($request->input('services_card_description_en', [])),
-        'services_card_title_ar' => json_encode($request->input('services_card_title_ar', [])),
-        'services_card_description_ar' => json_encode($request->input('services_card_description_ar', [])),
-    ]);
-
-    // Redirect to the About Us page with a success message
-    return redirect()->route('admin.about.index')->with('success', 'About Us page created successfully!');
-}
 
 
     // Show the form for editing the About Us page

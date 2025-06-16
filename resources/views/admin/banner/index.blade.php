@@ -12,16 +12,20 @@
                                 <h5 class="card-title pt-2">Banners</h5>
                             </div>
                             <div class="col-md-6 col-6 text-right">
-                                <a href="{{ route('admin.banner.create') }}" class="btn btn-primary">Add Banner</a>
+                                <!-- Check if there is already an existing banner -->
+                                @if ($banners->isEmpty())
+                                    <a href="{{ route('admin.banner.create') }}" class="btn btn-primary">Add Banner</a>
+                                @else
+                                    <span class="btn btn-secondary disabled">Banner already exists</span>
+                                @endif
                             </div>
                         </div>
+
                         <div class="table-responsive">
                             <table class="table table-striped">
                                 <thead>
                                     <tr>
                                         <th scope="col">#</th>
-                                        <th scope="col">Title (EN)</th>
-                                        <th scope="col">Title (AR)</th>
                                         <th scope="col">Image</th>
                                         <th scope="col">Actions</th>
                                     </tr>
@@ -30,8 +34,6 @@
                                     @foreach ($banners as $banner)
                                         <tr>
                                             <td scope="row">{{ $banner->id }}</td>
-                                            <td>{{ $banner->title_en ?? 'No title' }}</td>
-                                            <td>{{ $banner->title_ar ?? 'No title' }}</td>
                                             <td>
                                                 <img src="{{ asset($banner->image) }}" width="80" height="80" alt="Banner Image">
                                             </td>
@@ -51,7 +53,7 @@
                                                                     <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
                                                                 </div>
                                                                 <div class="modal-body">
-                                                                    Are you sure you want to delete banner: "{{ $banner->title_en ?? 'No title' }}"?
+                                                                    Are you sure you want to delete this banner?
                                                                 </div>
                                                                 <div class="modal-footer">
                                                                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>

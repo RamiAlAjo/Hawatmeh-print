@@ -51,8 +51,68 @@
 
                             <div class="form-group">
                                 <label for="phone">Phone</label>
-                                <input type="text" class="form-control" name="phone" id="phone" placeholder="Phone Number" value="{{ $settings->phone ?? '' }}">
+                                <input type="text" class="form-control" name="phone[]" id="phone1" placeholder="Phone Number" value="{{ $phones[0] ?? '' }}">
                             </div>
+
+                            <!-- Additional Phone Fields (will be added dynamically) -->
+                            <div id="additional-phones">
+                                @foreach($phones as $index => $phone)
+                                    @if ($index > 0) <!-- Skip the first phone number field -->
+                                        <div class="form-group" id="phone{{ $index + 1 }}-container">
+                                            <label for="phone{{ $index + 1 }}">Phone {{ $index + 1 }}</label>
+                                            <input type="text" class="form-control" name="phone[]" id="phone{{ $index + 1 }}" placeholder="Phone Number" value="{{ $phone }}">
+                                            <button type="button" class="btn btn-danger mt-1" onclick="removePhoneField({{ $index + 1 }})">Remove</button>
+                                        </div>
+                                    @endif
+                                @endforeach
+                            </div>
+
+                            <!-- Button to Add More Phone Numbers -->
+                            <button type="button" class="btn btn-secondary" id="add-phone-btn">Add Another Phone Number</button>
+
+                            <script>
+                                document.addEventListener("DOMContentLoaded", function () {
+                                    let phoneCount = {{ count($phones) }};  // Count of the existing phone numbers
+
+                                    // Maximum number of phone fields allowed
+                                    const maxPhones = 3;
+
+                                    // Add event listener for "Add Phone Number" button
+                                    document.getElementById("add-phone-btn").addEventListener("click", function() {
+                                        // If the phoneCount is less than the maximum allowed, add a new phone field
+                                        if (phoneCount < maxPhones) {
+                                            phoneCount++;
+
+                                            // Create a new input field for phone number
+                                            let phoneFieldHTML = `
+                                                <div class="form-group" id="phone${phoneCount}-container">
+                                                    <label for="phone${phoneCount}">Phone ${phoneCount}</label>
+                                                    <input type="text" class="form-control" name="phone[]" id="phone${phoneCount}" placeholder="Phone Number">
+                                                    <button type="button" class="btn btn-danger mt-1" onclick="removePhoneField(${phoneCount})">Remove</button>
+                                                </div>
+                                            `;
+
+                                            // Append the new phone field to the additional phones container
+                                            document.getElementById("additional-phones").insertAdjacentHTML('beforeend', phoneFieldHTML);
+                                        } else {
+                                            alert('You can add a maximum of 3 phone numbers.');
+                                        }
+                                    });
+                                });
+
+                                // Function to remove a phone number field
+                                function removePhoneField(phoneCount) {
+                                    document.getElementById(`phone${phoneCount}-container`).remove();
+                                }
+                            </script>
+
+
+                            <div class="form-group">
+                                <label for="fax">Fax</label>
+                                <input type="text" class="form-control" name="fax" id="fax" placeholder="Fax Number" value="{{ $settings->fax ?? '' }}">
+                            </div>
+
+
 
                             <div class="form-group">
                                 <label for="email">Email</label>

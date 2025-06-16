@@ -30,37 +30,37 @@ class AdminBannerController extends Controller
      * Store a newly created banner in storage.
      */
     public function store(Request $request)
-{
-    // Validate the incoming data
-    $validatedData = $request->validate([
-        'title_en' => 'required|string|max:255',
-        'title_ar' => 'nullable|string|max:255',
-        'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:6048',
-    ]);
+    {
+        // Check if there's already an existing banner
+        $existingBanner = Banner::first();
+        if ($existingBanner) {
+            return redirect()->route('admin.banner.index')->with('status-error', 'A banner already exists. You cannot create more than one.');
+        }
 
-    // Check if the request has a file to upload
-    $imagePath = null;
+        // Validate the incoming data (only image is required now)
+        $validatedData = $request->validate([
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:6048',
+        ]);
 
-    if ($request->hasFile('image')) {
-        $bannersImageUploadPath = 'uploads/banners/image/';
-        $file = $request->file('image');
-        $ext = $file->getClientOriginalExtension();
-        $bannersImageFilename = time() . '.' . $ext;
-        $file->move($bannersImageUploadPath, $bannersImageFilename);
-        $imagePath = $bannersImageUploadPath . $bannersImageFilename;
+        // Check if the request has a file to upload
+        $imagePath = null;
+
+        if ($request->hasFile('image')) {
+            $bannersImageUploadPath = 'uploads/banners/image/';
+            $file = $request->file('image');
+            $ext = $file->getClientOriginalExtension();
+            $bannersImageFilename = time() . '.' . $ext;
+            $file->move($bannersImageUploadPath, $bannersImageFilename);
+            $imagePath = $bannersImageUploadPath . $bannersImageFilename;
+        }
+
+        // Create the banner in the database
+        Banner::create([
+            'image' => $imagePath,
+        ]);
+
+        return redirect()->route('admin.banner.index')->with('success', 'Banner added successfully.');
     }
-
-    // Create the banner in the database
-    Banner::create([
-        'title_en' => $validatedData['title_en'],
-        'title_ar' => $validatedData['title_ar'] ?? null,
-        'image' => $imagePath,
-    ]);
-
-    return redirect()->route('admin.banner.index')->with('success', 'Banner added successfully.');
-}
-
-
 
     /**
      * Show the form for editing the specified banner.
