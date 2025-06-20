@@ -21,4 +21,5 @@ class FrontVisitorController extends Controller
         $visitorCount = VisitorCount::firstOrNew([]);
         return response()->json(['count' => $visitorCount->count]);
     }
+
 }

@@ -29,17 +29,16 @@
 }
 
 .language-flag-NA {
-    width: 30px; /* Increase the size of the flag */
+    width: 30px;
     height: auto;
-    margin-right: 8px; /* Space between the flag and text */
+    margin-right: 8px;
 }
 
 .language-text-NA {
     font-size: 1rem;
     color: white;
-    font-weight: normal; /* Remove bold from text */
+    font-weight: normal;
 }
-
 
 /* Navbar */
 .navbar-NA {
@@ -65,13 +64,13 @@
 /* Active Link Styling - Black Underline */
 .navbar-nav-NA .nav-link-NA.active {
     font-weight: bold;
-    border-bottom: 3px solid #000; /* Black underline */
+    border-bottom: 3px solid #000;
     padding-bottom: 5px;
 }
 
 /* Hover Effect - Green Text */
 .navbar-nav-NA .nav-link-NA:hover {
-    color: #07d82a; /* Green on hover */
+    color: #07d82a;
 }
 
 /* Transition for Smooth Effect */
@@ -98,7 +97,7 @@
     background: #f8f9fa;
     outline: none;
     position: absolute;
-    right: 50px; /* Moves input left of the icon */
+    right: 50px;
     display: none;
 }
 
@@ -131,6 +130,11 @@
     transform: scale(1.1);
 }
 
+/* Focused Search Icon (for accessibility) */
+#search-toggle-NA:focus {
+    outline: 2px solid #07d82a;
+}
+
 /* Mobile Adjustments */
 @media (max-width: 991px) {
     .navbar-nav-NA {
@@ -143,7 +147,7 @@
         padding: 10px 0;
     }
 
-    /* Make sure search input is visible inside the burger menu */
+    /* Ensure search input is visible in mobile */
     .search-container-NA {
         flex-direction: column;
         align-items: center;
@@ -153,7 +157,7 @@
     }
 
     .search-input-NA {
-        position: static; /* Removes absolute positioning in mobile */
+        position: static;
         width: 100%;
         text-align: center;
     }
@@ -169,16 +173,24 @@
     }
 }
 
+/* Enhance Form Input */
 .form-control_NA {
-    /* margin-bottom: 15px; */
-    /* border-radius: 5px; */
     padding: 12px;
     border: 1px solid #4CAF50;
+    border-radius: 5px;
+    transition: border-color 0.3s ease;
 }
 
-/* Parent Container (assuming it's the search container) */
+/* Focus on Form Input */
+.form-control_NA:focus {
+    border-color: #07d82a;
+    outline: none;
+    box-shadow: 0 0 5px rgba(7, 216, 42, 0.5);
+}
+
+/* Parent Container for Search */
 .search-container-NA {
-    position: relative; /* Ensure the parent is relative */
+    position: relative;
     display: flex;
     align-items: center;
 }
@@ -194,8 +206,8 @@
     font-size: 1rem;
     background: #f8f9fa;
     outline: none;
-    position: relative; /* Ensure it's relative to the parent */
-    right: 50px; /* Moves input left of the icon */
+    position: relative;
+    right: 50px;
     display: none;
 }
 
@@ -210,12 +222,12 @@
 #search-results {
     background: white;
     position: absolute;
-    top: 100%; /* Position directly below the search input */
-    left: -50;
-    width: 100%; /* Match the width of the search input */
-    max-width: 220px; /* Maximum width */
-    max-height: 250px; /* Maximum height */
-    overflow-y: auto; /* Scroll if content overflows */
+    top: 100%;
+    left: -50px;
+    width: 100%;
+    max-width: 220px;
+    max-height: 250px;
+    overflow-y: auto;
     border-radius: 8px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
     display: none;
@@ -285,100 +297,256 @@
 /* ===============================
    RESPONSIVE ENHANCEMENTS
    =============================== */
-   @media (max-width: 767px) {
-    /* Logo: Resize and center on smaller screens */
+/* ===============================
+   ENHANCED RESPONSIVE DESIGN FOR SMALLER SCREENS
+   =============================== */
+
+/* General Mobile Enhancements */
+@media (max-width: 767px) {
+
+    /* Navbar Branding (Logo) */
     .navbar-brand-NA img {
         height: 60px;
         max-width: 150px;
         margin: 0 auto;
         display: block;
         transform: scale(1.6); /* Less aggressive scaling */
+        transition: transform 0.3s ease-in-out; /* Smooth scale transition */
     }
 
+    /* Green Space Above Navbar (Align text and space properly) */
     .green-space-NA {
         flex-direction: column;
         justify-content: center;
         align-items: center;
-        padding: 5px;
+        padding: 10px; /* Adjust for better spacing */
         text-align: center;
     }
 
+    /* Language Section (Center the flag and text) */
     .language-section-NA {
         flex-direction: row;
         justify-content: center;
+        margin-bottom: 10px; /* Better separation */
     }
 
-    /* Collapse the navbar neatly */
+    .language-flag-NA {
+        width: 25px; /* Slightly reduce flag size */
+        margin-right: 5px; /* Reduce space between flag and text */
+    }
+
+    .language-text-NA {
+        font-size: 0.9rem; /* Adjust font size for mobile */
+        color: white;
+        font-weight: normal;
+    }
+
+    /* Navbar Links */
     .navbar-nav-NA {
-        padding-top: 10px;
-    }
-
-    /* Adjust padding for touch targets */
-    .navbar-nav-NA .nav-link-NA {
-        padding: 12px 0;
-        font-size: 1rem;
-    }
-
-    /* Make logo appear above collapsed menu */
-    .navbar-brand-NA {
-        order: -1;
-        width: 100%;
+        flex-direction: column;
+        justify-content: center;
         text-align: center;
-        margin-bottom: 10px;
+        width: 100%;
     }
 
-    /* Adjust search layout in collapsed mode */
+    .navbar-nav-NA .nav-link-NA {
+        padding: 10px 0;
+        font-size: 1.1rem; /* Ensure text is legible */
+        font-weight: 500;
+    }
+
+    /* Active Link Styling */
+    .navbar-nav-NA .nav-link-NA.active {
+        font-weight: bold;
+        border-bottom: 3px solid #000;
+        padding-bottom: 5px;
+    }
+
+    /* Search Bar (Mobile View) */
     .search-container-NA {
         flex-direction: column;
         align-items: center;
         width: 100%;
-        margin-top: 15px;
+        margin-top: 10px;
+        padding: 5px; /* Adjust search bar padding */
     }
 
     .search-input-NA {
-        width: 90% !important;
+        width: 90%;
         max-width: 100%;
         text-align: center;
+        margin-top: 10px;
+        font-size: 1rem; /* Ensure readability */
     }
 
+    /* Search Icon (Increase tap area for touch devices) */
+    #search-toggle-NA {
+        font-size: 1.6rem; /* Slightly increase icon size */
+        padding: 8px;
+        margin-top: 10px;
+    }
+
+    /* Search Results Container */
     #search-results {
         left: 0;
         max-width: 100%;
         width: 90%;
+        margin-top: 10px;
+    }
+
+    /* Navbar Toggler and Collapse Enhancements */
+    .navbar-toggler {
+        font-size: 1.6rem; /* Increase size for better accessibility */
+        padding: 8px;
+        margin-top: 10px;
+    }
+
+    /* Ensure the collapsed navbar items are easy to click/tap */
+    .navbar-collapse {
+        padding-top: 10px;
+        text-align: center;
+    }
+
+    .navbar-collapse .nav-link-NA {
+        padding: 12px 0;
+        font-size: 1.2rem;
+    }
+
+    /* Adjusting the 'See All' button and links */
+    .see-all-container {
+        margin-top: 10px;
+        text-align: center;
+    }
+
+    .see-all-link {
+        color: rgb(46, 57, 141);
+        font-weight: bold;
+        font-size: 1.1rem; /* Increase font size for easy tap */
+        text-decoration: none;
+        cursor: pointer;
+    }
+
+    .see-all-link:hover {
+        text-decoration: underline;
     }
 }
 
-/* Extra: Improve spacing on medium screens */
+/* ===============================
+   ENHANCED RESPONSIVE DESIGN FOR MEDIUM SCREENS (<=991px)
+   =============================== */
 @media (max-width: 991px) {
+
+    /* Navbar Branding (Logo) */
     .navbar-brand-NA img {
         height: 80px;
-        transform: scale(1.8);
+        max-width: 160px;
+        margin: 0 auto;
+        display: block;
+        transform: scale(1.4); /* Scaling for medium screens */
     }
 
+    /* Adjusting padding and alignment for the navbar links */
+    .navbar-nav-NA {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .navbar-nav-NA .nav-link-NA {
+        font-size: 1.1rem;
+        padding: 12px 0;
+    }
+
+    /* Improve spacing between logo and nav items */
+    .navbar-NA {
+        padding: 12px 20px;
+    }
+
+    /* Search Container and Input */
     .search-container-NA {
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
         margin-top: 10px;
+        padding: 5px;
     }
 
     .search-input-NA {
         width: 100%;
+        max-width: 100%;
+        text-align: center;
+        margin-top: 10px;
+    }
+
+    /* Search Icon Enhancements */
+    #search-toggle-NA {
+        font-size: 1.6rem;
+        padding: 8px;
+        margin-top: 10px;
+    }
+
+    /* Adjust the 'See All' Button */
+    .see-all-container {
+        margin-top: 10px;
+        text-align: center;
+    }
+
+    .see-all-link {
+        color: rgb(46, 57, 141);
+        font-weight: bold;
+        text-decoration: none;
+        font-size: 1.1rem; /* Increased size for readability on tablets */
+        cursor: pointer;
+    }
+
+    .see-all-link:hover {
+        text-decoration: underline;
     }
 }
 
-.see-all-container {
-    margin-top: 10px;
-    text-align: center;
+/* ===============================
+   GLOBAL MOBILE/SMALL SCREEN ADJUSTMENTS
+   =============================== */
+
+/* Add more padding to navbar items for touch targets */
+.navbar-nav-NA .nav-link-NA {
+    padding: 14px 0; /* Ensure larger clickable area */
 }
 
-.see-all-link {
-    color: rgb(46, 57, 141);
-    font-weight: bold;
-    text-decoration: none;
-    cursor: pointer;
+/* Improve search input clarity on small screens */
+.search-input-NA {
+    width: 90% !important; /* Force a responsive width */
+    font-size: 1rem; /* Adjust font size for readability */
 }
 
-.see-all-link:hover {
-    text-decoration: underline;
+/* Make search results fit better on smaller devices */
+#search-results {
+    max-width: 100%;
+    width: 90%;
+    left: 0;
+    right: 0;
+    margin: 0 auto;
 }
+
+/* Make sure the results are easily tappable */
+.search-result-item {
+    padding: 12px; /* Slightly increase padding for better tap targets */
+    font-size: 1rem; /* Adjust font size for better legibility */
+}
+
+/* Mobile-Friendly Input Focus */
+.form-control_NA:focus {
+    border-color: #07d82a;
+    outline: none;
+    box-shadow: 0 0 5px rgba(7, 216, 42, 0.5);
+    background-color: #f0f8f4;
+}
+
+/* Mobile-Friendly Button Focus */
+#search-toggle-NA:focus {
+    outline: 3px solid #07d82a;
+    border-radius: 5px;
+}
+
 
     </style>
 
@@ -462,11 +630,14 @@ style="width: 100%; display: flex; justify-content: {{ app()->getLocale() === 'a
     </nav>
 
         <script>
+
 document.addEventListener("DOMContentLoaded", function () {
     const searchToggle = document.getElementById("search-toggle-NA");
     const searchInput = document.getElementById("search-input-NA");
     const searchResults = document.getElementById("search-results");
     const loadingIndicator = document.getElementById("loading-indicator");
+    let searchTimeout;
+    let cache = {};  // Cache results to prevent multiple API calls for the same query
 
     // Toggle search input visibility
     searchToggle.addEventListener("click", function (e) {
@@ -482,72 +653,77 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 
     // Function to fetch and display search results
-    let searchTimeout;
-    searchInput.addEventListener("input", function () {
-        let query = this.value.trim();
-
-        if (searchTimeout) clearTimeout(searchTimeout);
+    searchInput.addEventListener("input", debounce(function () {
+        let query = searchInput.value.trim();
 
         if (query.length > 2) {
-            searchTimeout = setTimeout(() => {
+            // Check if the query is already cached
+            if (cache[query]) {
+                displaySearchResults(cache[query]);
+            } else {
                 loadingIndicator.style.display = "block";
-                fetch(`/search?query=${query}`)
-                    .then(response => response.json())
-                    .then(data => {
-                        displaySearchResults(data);
-                        loadingIndicator.style.display = "none";
-                    })
-                    .catch(error => {
-                        console.error("Error fetching search results:", error);
-                        searchResults.innerHTML = "<p class='search-no-results'>Error fetching results.</p>";
-                        loadingIndicator.style.display = "none";
-                    });
-            }, 300); // Adds a delay (throttling) to prevent multiple API calls
+                fetchSearchResults(query);
+            }
         } else {
             searchResults.innerHTML = "";
             loadingIndicator.style.display = "none";
         }
-    });
+    }, 300)); // Debounce input to delay the API call
 
-    searchInput.addEventListener("keydown", function (e) {
-    if (e.key === "Enter") {
-        e.preventDefault(); // prevent form submission or default behavior
-        const query = searchInput.value.trim();
-        if (query.length > 2) {
-            // Redirect to search_results page with the query
-            window.location.href = `/search_results?query=${encodeURIComponent(query)}`;
-        }
+    // Fetch search results from the server
+    function fetchSearchResults(query) {
+        fetch(`/search?query=${query}`)
+            .then(response => response.json())
+            .then(data => {
+                cache[query] = data;  // Cache the results
+                displaySearchResults(data);
+                loadingIndicator.style.display = "none";
+            })
+            .catch(error => {
+                console.error("Error fetching search results:", error);
+                searchResults.innerHTML = "<p class='search-no-results'>Error fetching results.</p>";
+                loadingIndicator.style.display = "none";
+            });
     }
-});
-
 
     // Function to display search results dynamically
     function displaySearchResults(products) {
-    searchResults.innerHTML = ""; // Clear previous results
+        searchResults.innerHTML = ""; // Clear previous results
 
-    if (products.length === 0) {
-        searchResults.innerHTML = "<p class='search-no-results'>No results found.</p>";
-    } else {
-        let ul = document.createElement("ul");
-        ul.classList.add("search-results-list");
+        if (products.length === 0) {
+            searchResults.innerHTML = "<p class='search-no-results'>No results found.</p>";
+        } else {
+            let ul = document.createElement("ul");
+            ul.classList.add("search-results-list");
 
-        products.forEach(product => {
-            let li = document.createElement("li");
-            li.classList.add("search-result-item");
-            li.innerHTML = `<a href="/products/${product.id}" class="search-result-link">${product.title_en}</a>`;
-            ul.appendChild(li);
-        });
+            products.forEach(product => {
+                let li = document.createElement("li");
+                li.classList.add("search-result-item");
+                li.innerHTML = `<a href="/products/${product.id}" class="search-result-link">${product.title_en}</a>`;
+                ul.appendChild(li);
+            });
 
-        searchResults.appendChild(ul);
+            searchResults.appendChild(ul);
 
-        // Add "See All" link at the bottom
-        let seeAllDiv = document.createElement("div");
-        seeAllDiv.classList.add("see-all-container");
-        seeAllDiv.innerHTML = `<a href="/search_results?query=${encodeURIComponent(searchInput.value.trim())}" class="see-all-link">See All</a>`;
-        searchResults.appendChild(seeAllDiv);
+            // Add "See All" link at the bottom
+            let seeAllDiv = document.createElement("div");
+            seeAllDiv.classList.add("see-all-container");
+            seeAllDiv.innerHTML = `<a href="/search_results?query=${encodeURIComponent(searchInput.value.trim())}" class="see-all-link">See All</a>`;
+            searchResults.appendChild(seeAllDiv);
+        }
     }
-}
 
+    // Handle "Enter" key press in search input
+    searchInput.addEventListener("keydown", function (e) {
+        if (e.key === "Enter") {
+            e.preventDefault(); // prevent form submission or default behavior
+            const query = searchInput.value.trim();
+            if (query.length > 2) {
+                // Redirect to search_results page with the query
+                window.location.href = `/search_results?query=${encodeURIComponent(query)}`;
+            }
+        }
+    });
 
     // Hide search results when clicking outside
     document.addEventListener("click", function (event) {
@@ -555,21 +731,34 @@ document.addEventListener("DOMContentLoaded", function () {
             searchResults.innerHTML = "";
         }
     });
+
+    // Debounce function to limit the rate of API calls
+    function debounce(func, delay) {
+        return function () {
+            clearTimeout(searchTimeout);
+            searchTimeout = setTimeout(func, delay);
+        };
+    }
+
+    // Toggle language flag (Arabic/English)
+    function toggleFlag() {
+        const flagImg = document.getElementById("language-flag-NA");
+        const flagText = document.querySelector(".language-text-NA");
+
+        // Check the current flag source and toggle between Jordan and UK flags
+        if (flagImg.src.includes("Flag_of_Jordan")) {
+            // Change to UK flag
+            flagImg.src = "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a4/Flag_of_the_United_Kingdom.svg/800px-Flag_of_the_United_Kingdom.svg.png";
+            flagText.textContent = "English";
+        } else {
+            // Change back to Jordan flag
+            flagImg.src = "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c0/Flag_of_Jordan.svg/320px-Flag_of_Jordan.svg.png";
+            flagText.textContent = "Arabic";
+        }
+    }
+
+    // Expose toggleFlag function to global scope if needed
+    window.toggleFlag = toggleFlag;
 });
 
-function toggleFlag() {
-    const flagImg = document.getElementById("language-flag-NA");
-    const flagText = document.querySelector(".language-text-NA");
-
-    // Check the current flag source and toggle between Jordan and UK flags
-    if (flagImg.src.includes("Flag_of_Jordan")) {
-        // Change to UK flag
-        flagImg.src = "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a4/Flag_of_the_United_Kingdom.svg/800px-Flag_of_the_United_Kingdom.svg.png";
-        flagText.textContent = "English";
-    } else {
-        // Change back to Jordan flag
-        flagImg.src = "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c0/Flag_of_Jordan.svg/320px-Flag_of_Jordan.svg.png";
-        flagText.textContent = "Arabic";
-    }
-}
- </script>
+        </script>

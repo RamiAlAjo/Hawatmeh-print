@@ -4,7 +4,6 @@
 
 <x-banner :pageTitle="__('Products')" />
 
-
 <style>
     /* Product Section */
     .product-section-PRO {
@@ -32,15 +31,7 @@
         background-color: #1B5E20;
     }
 
-    /* Product grid */
-    .product-grid-PRO {
-        display: grid;
-        grid-template-columns: repeat(4, 1fr);
-        grid-template-rows: repeat(2, 1fr);
-        gap: 20px;
-        margin-bottom: 20px;
-    }
-
+    /* Product Item */
     .product-item-PRO {
         background-color: white;
         border-radius: 15px;
@@ -116,44 +107,29 @@
     .product-item-PRO:hover .product-name-PRO {
         color: #2E7D32; /* Green text on hover */
     }
-
-    @media (max-width: 1200px) {
-        .product-grid-PRO {
-            grid-template-columns: repeat(3, 1fr);
-        }
-    }
-
-    @media (max-width: 900px) {
-        .product-grid-PRO {
-            grid-template-columns: repeat(2, 1fr);
-        }
-    }
-
-    @media (max-width: 600px) {
-        .product-grid-PRO {
-            grid-template-columns: 1fr;
-        }
-    }
 </style>
 
 <div class="container">
-    <!-- Our Product Section -->
+    <!-- Product Section Title -->
     <h2 class="section-title-PRO" style="color: #2E7D32; margin-bottom: 30px;">{{ __('Our Product') }}</h2>
 
     <div class="product-section-PRO position-relative">
+        <!-- Carousel Component -->
         <div id="productCarousel" class="carousel slide" data-bs-ride="carousel">
             <div class="carousel-inner">
                 @foreach ($products->chunk(8) as $chunkIndex => $chunk)
                     <div class="carousel-item {{ $chunkIndex === 0 ? 'active' : '' }}">
-                        <div class="product-grid-PRO">
+                        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-4">
                             @foreach ($chunk as $product)
-                                <div class="product-item-PRO">
-                                    <div class="product-image-PRO">
-                                        <img src="{{ asset('storage/' . $product->image) }}" alt="{{ app()->getLocale() === 'ar' ? $product->title_ar : $product->title_en }}">
-                                        <a href="{{ route('products.show', $product->id) }}" class="more-button">{{ __('More') }}</a>
-                                    </div>
-                                    <div class="product-name-PRO">
-                                        {{ app()->getLocale() === 'ar' ? $product->title_ar : $product->title_en }}
+                                <div class="col">
+                                    <div class="product-item-PRO">
+                                        <div class="product-image-PRO">
+                                            <img src="{{ asset('storage/' . $product->image) }}" alt="{{ app()->getLocale() === 'ar' ? $product->title_ar : $product->title_en }}">
+                                            <a href="{{ route('products.show', $product->id) }}" class="more-button">{{ __('More') }}</a>
+                                        </div>
+                                        <div class="product-name-PRO">
+                                            {{ app()->getLocale() === 'ar' ? $product->title_ar : $product->title_en }}
+                                        </div>
                                     </div>
                                 </div>
                             @endforeach
@@ -163,14 +139,14 @@
             </div>
 
             <!-- Carousel Controls -->
-            <a class="carousel-control-prev" href="#productCarousel" role="button" data-bs-slide="prev">
+            <button class="carousel-control-prev" type="button" data-bs-target="#productCarousel" data-bs-slide="prev">
                 <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                 <span class="visually-hidden">{{ __('Previous') }}</span>
-            </a>
-            <a class="carousel-control-next" href="#productCarousel" role="button" data-bs-slide="next">
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#productCarousel" data-bs-slide="next">
                 <span class="carousel-control-next-icon" aria-hidden="true"></span>
                 <span class="visually-hidden">{{ __('Next') }}</span>
-            </a>
+            </button>
         </div>
     </div>
 </div>

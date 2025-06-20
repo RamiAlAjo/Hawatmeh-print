@@ -13,9 +13,13 @@ return Application::configure(basePath: dirname(__DIR__))
         health: '/up',
     )
     ->withMiddleware(function (Middleware $middleware) {
-        // Register global middleware here
+        // ✅ Only middleware safe for global usage
         $middleware->append(SetLocale::class);
+
+        // ❌ Do NOT register session-dependent middleware globally
+        // $middleware->append(TrackUniqueVisitor::class);
     })
     ->withExceptions(function (Exceptions $exceptions) {
-        //
-    })->create();
+        // Handle exceptions here
+    })
+    ->create();

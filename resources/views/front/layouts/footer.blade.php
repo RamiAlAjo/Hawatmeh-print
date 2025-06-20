@@ -245,17 +245,18 @@
 
       <!-- Left Side: Full Logo Image (includes phone number) -->
       <div class="col-md-3 FO-logo mb-3 mb-md-0">
-        <img src="{{ asset('./Hawatmeh Logo.svg') }}" alt="Awatmeh Pack Logo" class="img-fluid" style="transform: scale(2.1);">
+
+        <a class="navbar-brand navbar-brand-NA" href="{{ route('home') }}">
+            <img src="{{ asset('./Hawatmeh Logo.svg') }}" alt="Awatmeh Pack Logo" class="img-fluid" style="transform: scale(2.3);">
+        </a>
 
         <div class="FO-visitor-counter mt-2" aria-label="Visitor counter" role="group">
             <span class="fw-bold">Visitors</span>
-            <span class="visually-hidden">Visitor count is</span>
-            <div class="visitor-count-container">
-              <span class="FO-counter-box" data-digit="1">0</span>
-              <span class="FO-counter-box" data-digit="2">0</span>
-              <span class="FO-counter-box" data-digit="3">0</span>
-              <span class="FO-counter-box" data-digit="4">0</span>
-              <span class="FO-counter-box" data-digit="5">0</span>
+            <div class="visitor-count-container" id="visitorCounter">
+                <!-- Will be filled dynamically by JS -->
+                @for($i = 0; $i < 5; $i++)
+                    <span class="FO-counter-box">0</span>
+                @endfor
             </div>
           </div>
       </div>
@@ -312,21 +313,28 @@
 
 <script>
     document.addEventListener("DOMContentLoaded", function () {
-      document.querySelectorAll(".animated-counter").forEach((box, index) => {
-        const target = parseInt(box.getAttribute("data-digit"), 10);
-        if (isNaN(target)) return;
+      fetch("/get-visitor-count")
+        .then(response => response.json())
+        .then(data => {
+          const countStr = data.count.toString().padStart(5, "0"); // pad to 5 digits
+          const digits = countStr.split("");
+          const boxes = document.querySelectorAll(".FO-counter-box");
 
-        let current = 0;
+          digits.forEach((digit, index) => {
+            let current = 0;
+            const target = parseInt(digit, 10);
 
-        const interval = setInterval(() => {
-          box.textContent = current;
-          box.classList.add("counting");
-          if (current >= target) {
-            clearInterval(interval);
-            box.classList.remove("counting");
-          }
-          current++;
-        }, 100 + index * 30); // staggered animation delay
-      });
+            const interval = setInterval(() => {
+              boxes[index].textContent = current;
+              if (current >= target) {
+                clearInterval(interval);
+              }
+              current++;
+            }, 100 + index * 30);
+          });
+        })
+        .catch(error => {
+          console.error("Error fetching visitor count:", error);
+        });
     });
-  </script>
+    </script>
